@@ -7,6 +7,7 @@ const DefaultLayout=()=>{
     <div className="app-container">
       <Header />
       <main  className="main-content">
+        <h1>안녕</h1>
         <Outlet />
       </main>
     </div>
