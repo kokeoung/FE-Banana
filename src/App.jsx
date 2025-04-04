@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Modal from '/src/shared/ui/Modal.jsx'
+
+import React from "react"
+import SignupForm from "./features/ui/SignupForm"
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-
+  //test
   return (
     <>
-      <button onClick={() => setShowModal(true)}>로그인</button>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <SignupForm />
+
     </>
   )
 }
