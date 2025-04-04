@@ -1,17 +1,15 @@
-import React from "react"
-import { Link, RouterProvider } from "react-router-dom"
-import LoginForm from "./features/ui/LoginForm"
 
+import React from "react"
+import SignupForm from "./features/ui/SignupForm"
 
 function App() {
-
+  //test
   return (
     <>
-      <LoginForm />
+      <SignupForm />
     </>
   )
 }
-
 export default App
 
 
