@@ -1,15 +1,13 @@
-import React from "react"
-import { Link, RouterProvider } from "react-router-dom"
+import React, { useState } from "react";
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <Link to={'/post'}>post</Link>
-      <Link to={'/table'}>table</Link>
-      <Link to={'/test'}>test</Link>
+      <button onClick={() => setShowModal(true)}>로그인</button>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   )
 }
-
 export default App
