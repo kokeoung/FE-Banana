@@ -1,13 +1,11 @@
 import React from "react"
-import { Link, RouterProvider } from "react-router-dom"
+import SignupForm from "./features/ui/SignupForm"
 
 function App() {
-
+  //test
   return (
     <>
-      <Link to={'/post'}>post</Link>
-      <Link to={'/table'}>table</Link>
-      <Link to={'/test'}>test</Link>
+      <SignupForm />
     </>
   )
 }
