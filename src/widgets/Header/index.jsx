@@ -1,5 +1,6 @@
 export default function Header(){
   return(<>
-    <h1>헤더</h1>
+    <div className="Header" style={{display:"flex",justifyContent:"space-between"}}>
+    </div>
   </>)
 }
