@@ -1,5 +1,7 @@
 .profile-container{
+  height: 40px;
   display: flex;
+  align-items: center;
 }
 .profile-container > .profile-img > img{
   height: 24px;

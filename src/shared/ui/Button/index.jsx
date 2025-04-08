@@ -1,3 +1,5 @@
+import "./Button.css"
+
 export default function Button({value,onClick,disabled,size}){
 
   return(<>

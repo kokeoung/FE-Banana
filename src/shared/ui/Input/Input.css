@@ -1,16 +1,9 @@
-.input-container > .size-s{
-  width: 5px;
-  height: 5px;
-}
-
-.input-container > .size-m{
-  
-}
-
-.input-container > .size-l{
-  
-}
-
 .input-container > .input-error{
   color: red;
+}
+.input-container > input{
+  border-radius: 5px;
+  border: none;
+  border: 1px solid gray;
+  padding: 7px;
 }
