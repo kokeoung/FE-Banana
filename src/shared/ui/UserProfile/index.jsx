@@ -1,3 +1,5 @@
+import "./UserProfile.css"
+
 export default function UserProfile({profileImage,nickname}){
   return(<>
     <div className="profile-container">

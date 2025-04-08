@@ -1,0 +1,13 @@
+.profile-container{
+  display: flex;
+}
+.profile-container > .profile-img > img{
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.profile-container > .proflie-nick{
+  font-size: 12px;
+  font-weight: 600;
+}
