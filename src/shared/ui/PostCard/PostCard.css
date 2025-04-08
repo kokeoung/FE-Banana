@@ -41,12 +41,7 @@
   .post-card > .post-footer > .post-child{
     height: inherit;
   }
-  .post-card > .post-footer > .post-likes{
-    display: flex;
-    align-items: center;
-  }
-  .post-card > .post-footer > .post-likes >div:first-child{
-    margin-right: 5px;
-  }
+
   
   
+

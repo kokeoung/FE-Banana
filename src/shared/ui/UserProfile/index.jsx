@@ -1,5 +1,6 @@
 import './UserProfile.css';
 
+
 export default function UserProfile({profileImage,nickname}){
   return(<>
     <div className="profile-container">
@@ -9,6 +10,7 @@ export default function UserProfile({profileImage,nickname}){
       <div className="proflie-nick">
         <span id="by">by</span>&nbsp;
         {nickname} 
+
       </div>
     </div>
   </>)
