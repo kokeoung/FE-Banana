@@ -1,15 +1,19 @@
+
 .profile-container{
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
-.profile-container > .profile-img > img{
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-.profile-container > .proflie-nick{
-  font-size: 12px;
-  font-weight: 600;
-}
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+  .profile-container > .profile-img > img{
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .profile-container > .proflie-nick{
+    font-size: 12px;
+    font-weight: 600;
+  }
+  #by {
+    color: #999;
+  }

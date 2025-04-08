@@ -1,11 +1,37 @@
+import { useState } from "react";
 import LoginForm from "../../features/ui/LoginForm";
 import SignupForm from "../../features/ui/SignupForm";
+import "./AuthPage.css";
+import Logo from "../../app/assets/banana.png";
 
 export default function AuthPage(){
-  return(<>
-    <h1>로그인 회원가입</h1>
+  
+  const [check,setCheck] = useState(true);
+  
+  function handleClick(){
+    setCheck(!check)
+  }
 
-    <LoginForm />
-    <SignupForm />
+  return(<>
+  <div className="auth-wrap">
+    <div className="auth-container">
+        <div className="auth-header">
+          <div className="auth-logo">
+            <img src={Logo}/>
+          </div>
+        </div>
+        <div className="auth-main">
+          <div>
+            {check?<LoginForm />:<SignupForm />}
+          </div>
+          <div className="auth-check">
+            {(check)
+            ?(<div>계정이 없다면&nbsp;<span className="auth-click" onClick={handleClick}>회원가입</span>&nbsp;해주세요</div>)
+            :(<div>계정이 있다면&nbsp;<span className="auth-click" onClick={handleClick}>로그인</span>&nbsp;해주세요</div>)}
+          </div>
+        </div>
+      </div>
+  </div>
+    
   </>)
 }
