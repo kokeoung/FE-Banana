@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .profile-container{
     display: flex;
     align-items: center;
@@ -17,25 +16,4 @@
   #by {
     color: #999;
   }
-
-=======
-
-.profile-container{
-    display: flex;
-    align-items: center;
-    gap: 1px;
-  }
-  .profile-container > .profile-img > img{
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-  .profile-container > .proflie-nick{
-    font-size: 12px;
-    font-weight: 600;
-  }
-  #by {
-    color: #999;
-  }
->>>>>>> 4588d8b79a5fcf2dd8cc967f9d8dade0e41b4e64
+/*  */
