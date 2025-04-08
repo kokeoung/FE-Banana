@@ -1,0 +1,24 @@
+.auth-form-container{
+  width: inherit;
+  height: inherit;
+}
+.auth-form-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-form-container > form > div:first-child{
+  margin-top: 10px;
+}
+.auth-form-container > form > div > input{
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 0.5px solid #ccc;
+  width: 230px;
+  height: 33px;
+}
+.auth-form-container > form > div{
+  margin-bottom: 10px;
+}

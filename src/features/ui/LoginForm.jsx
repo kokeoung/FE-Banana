@@ -1,24 +1,15 @@
-import React from "react";
+import Button from "@shared/ui/Button"
+import "./AuthForm.css"
 
-const LoginForm = () => {
+export default function LoginForm(){
     return (<>
-        <h2>로그인 페이지</h2>
+    <div className="auth-form-container">
         <form>
-            <dl>
-                <dt><label>아이디</label></dt>
-                <dd><input type="text" placeholder="아이디" /></dd>
-            </dl>
-            <dl>
-                <dt><label>비밀번호</label></dt>
-                <dd><input type="text" placeholder="비밀번호" /></dd>
-            </dl>
-            <dl>
-                <dd>
-                    <button type="submit">로그인</button>
-                </dd>
-            </dl>
+            <div><input placeholder={"아이디를 입력하세요"}/></div>
+            <div><input placeholder={"비밀번호를 입력하세요"}/></div>
+            <div><Button value={"로그인"}/></div>   
         </form>
+    </div>
     </>)
 }
 
-export default LoginForm;
