@@ -1,6 +1,6 @@
 import "./Button.css"
 
-export default function Button({value,onClick,disabled,size}){
+export default function Button({value,onClick,disabled,size="m"}){
 
   return(<>
       <div className="btn-container">
