@@ -1,0 +1,74 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: white;
+  color:black;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+
+
+}
+
+.header-titie{
+  font-weight: bold;
+  font-size: 1.5em;
+
+}
+.header-buttons{
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+}
+  
+.login-btn{
+
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #ffff;
+color: rebeccapurple;
+
+
+border-radius: 8px;
+cursor: pointer;
+
+
+}
+.pageadd-btn{
+
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #ffff;
+color: rebeccapurple;
+
+
+border-radius: 8px;
+cursor: pointer;
+
+}
+.seach-icon {
+  font-size: 30px;
+  cursor: pointer;
+  justify-items: right;
+  gap: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+  
+
+
+.user-icon{
+  font-size: 30px;
+  cursor: pointer;
+  gap: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap';
+
 export default function HomePage(){
   return(<>
     <h1>홈페이지</h1>
