@@ -80,7 +80,7 @@ export default function SignupForm() {
                     onChange={handleChange} error={error.passcheck}/></div>
         <div><Input name={"nick"} placeholder={"닉네임을 입력하세요"}
                     onChange={handleChange} error={error.nick}/></div>
-        <div><Button value={"회원가입"} onClick={handleClick}/></div>   
+        <div><Button value={"회원가입"} onClick={handleClick} size={"m"}/></div>   
       </form>
     </div>
   </>)
