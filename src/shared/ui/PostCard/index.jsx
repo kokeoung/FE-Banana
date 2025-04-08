@@ -13,10 +13,12 @@ export default function PostCard({title,imageUrl,createdAt,likes,children}){
         <div className="post-date">{createdAt}</div>
       </div>
       <div className="post-footer">
-        <div className="post-child">{children}</div>
-        <div className="post-likes">
-          <div>❤</div>
-          <div>{likes}</div>
+
+        <div>{children}</div>
+        <div className="post-like">
+          <div>🖤</div>
+          <div className="post-likes">{likes}</div>
+
         </div>
       </div>
     </div>
