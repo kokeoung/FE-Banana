@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import PostCard from '../../shared/ui/PostCard';
 import UserProfile from '../../shared/ui/UserProfile'
 import './HomePage.css';
