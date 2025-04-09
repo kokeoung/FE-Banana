@@ -1,0 +1,20 @@
+
+.post-detail-content{
+  font-size: 2.25rem;
+  line-height: 1.5;
+  letter-spacing: -0.004em;
+  margin-top: 0;
+  font-weight: 800;
+  color: black;
+  text-align: center;
+}
+.post-information{
+  text-align: center;
+}
+.username{
+  text-align: right;
+}
+
+.separator{
+  text-align: right;
+}
