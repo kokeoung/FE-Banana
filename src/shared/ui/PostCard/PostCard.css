@@ -1,4 +1,3 @@
-
 .post-card{ 
     background-color: #fff;
     height: 380px;
@@ -48,4 +47,3 @@
   .post-card > .post-footer > .post-child{
     height: inherit;
   }
-
