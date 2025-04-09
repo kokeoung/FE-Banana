@@ -30,7 +30,6 @@ export default function Header(){
     <FaAngleDown/>
     </div>
     </section>
-    
     </header>
   </>)
 }

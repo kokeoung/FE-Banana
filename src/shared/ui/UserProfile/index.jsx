@@ -1,4 +1,4 @@
-import "./UserProfile.css"
+import './UserProfile.css';
 
 export default function UserProfile({profileImage,nickname}){
   return(<>
@@ -7,7 +7,9 @@ export default function UserProfile({profileImage,nickname}){
         <img src={profileImage}/>
       </div>
       <div className="proflie-nick">
-        {nickname}
+        <span id="by">by</span>&nbsp;
+        {nickname} 
+
       </div>
     </div>
   </>)
