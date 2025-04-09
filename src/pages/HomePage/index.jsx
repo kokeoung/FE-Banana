@@ -1,5 +1,6 @@
 import PostCard from '../../shared/ui/PostCard';
-import UserProfile from '../../shared/ui/UserProfile'
+import UserProfile from '../../shared/ui/UserProfile';
+import FilterDropdown from '../../shared/ui/FilterDropdown';
 import './HomePage.css';
 
 const dummyPosts = [
@@ -81,6 +82,10 @@ export default function HomePage(){
 
   return (
     <>
+    <div className="content-wrapper">
+      <div className="filter-area">  
+        <FilterDropdown onChange={(value) => console.log("선택된 필터:", value)} />
+      </div>
       <div className="post-list-container">
         {dummyPosts.map(post => (
           <PostCard
@@ -98,6 +103,7 @@ export default function HomePage(){
           </PostCard>
         ))}
       </div>
+    </div>
     </>
   );
 }
