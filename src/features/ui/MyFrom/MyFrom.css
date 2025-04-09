@@ -1,0 +1,34 @@
+/* postspage */
+.postspage-container{
+  width: inherit;
+}
+.postspage-container > .postspage-header{
+  margin-top: 50px;
+  
+}
+.postspage-container > .postspage-header > .postspage-search-box{
+  width: 210px;
+  height: 40px;
+  border: 1px solid #bbb;
+  display: flex;
+  align-items: center;
+}
+.postspage-container > .postspage-header > .postspage-search-box > div{
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  color: #999;
+}
+.postspage-container > .postspage-header > .postspage-search-box > input{
+  width: 200px;
+  border: none;
+  background-color: transparent;
+  margin-left: 5px;
+}
+#postspage-focus{
+  border-color: black;
+}
+.postspage-container > .postspage-main{
+  display: flex;
+  flex-direction: column;
+}

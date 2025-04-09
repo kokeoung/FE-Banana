@@ -1,0 +1,18 @@
+.mypost-container{
+  margin-top: 90px;
+  display: flex;
+  align-items: center;
+}
+.mypost-container > .mypost-img > img{
+  width: 128px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.mypost-container > .mypost-nick > .mypost-nickname{
+  font-size: 24px;
+  font-weight: 800;
+}
+.mypost-container > .mypost-nick > .mypost-about{
+  font-size: 18px;
+  color: #333;
+}
