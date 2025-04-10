@@ -87,7 +87,6 @@ export default function WritePage() {
         </div>
 
         {/* 본문작성 영역 */}
-        <span id="italics"></span>
         <textarea
           ref={textareaRef}
           className="editor-content"
