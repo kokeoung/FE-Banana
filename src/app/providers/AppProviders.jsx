@@ -9,6 +9,9 @@ import SearchPage from "../../pages/Search";
 import ReadPage from "../../pages/ReadPage";
 import AuthPage from "../../pages/AuthPage";
 import TestPage from "../../pages/TestPage";
+import About from "../../features/ui/MyFrom/About";
+import Series from "../../features/ui/MyFrom/Series";
+import Posts from "../../features/ui/MyFrom/Posts";
 
 
 
@@ -23,7 +26,21 @@ const router=createBrowserRouter([
       },
       {
         path:"my",
-        element:<MyPage />
+        element:<MyPage />,
+        children:[
+          {
+            path:"posts",
+            element:<Posts />
+          },
+          {
+            path:"series",
+            element:<Series />
+          },
+          {
+            path:"about",
+            element:<About />
+          }
+        ]
       },
       {
         path:"read",

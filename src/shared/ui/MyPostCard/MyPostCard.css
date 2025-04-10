@@ -1,0 +1,36 @@
+.mypostcard-container{
+  height: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.mypostcard-container > .mypostcard-header > img{
+  margin-top: 60px;
+  object-fit:cover;
+  height: 400px;
+  width: 100%;
+}
+.mypostcard-container > .mypostcard-main > .mypostcard-title{
+  font-size: 24px;
+  font-weight: 800;
+  margin:20px 0
+}
+.mypostcard-container > .mypostcard-main > .mypostcard-content{
+  margin-bottom: 32px;
+  color: #444;
+}
+.mypostcard-container > .mypostcard-footer{
+  display: flex;
+  color: #888;
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 80px;
+}
+.mypostcard-container > .mypostcard-footer > span{
+  font-weight: 800;
+}
+.mypostcard-container > .mypostcard-footer > .mypostcard-liked{
+  display: flex;
+}
+.mypostcard-container > .mypostcard-footer > .mypostcard-liked> div{
+  margin-right: 5px;
+}

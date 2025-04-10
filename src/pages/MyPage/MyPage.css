@@ -1,0 +1,40 @@
+.my-container{
+  margin: 0 auto;
+  width: 40%;
+}
+.my-container > .my-header{
+  border-bottom: 1px solid #ddd;
+  height: 160px;
+}
+.my-container > .my-main{
+  
+}
+.my-container > .my-main > ul{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.my-container > .my-main > ul > li {
+  width: 128px;
+  height: 48px;
+  font-size: 21px;
+  position: relative;
+}
+.my-container > .my-main > ul > li >a{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;     /* 세로 가운데 */
+  justify-content: center; /* 가로 가운데 */
+  text-align: center;
+  font-weight: 800;
+}
+.my-container > .my-main > ul > .my-nav-active {
+  color: rgb(238, 202, 0);
+  border-bottom: 2px solid rgb(238, 202, 0);
+}
+

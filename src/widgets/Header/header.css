@@ -1,21 +1,18 @@
-header{
+.header{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px;
-  background-color: white;
+  background-color: rgb(248, 249, 250);
   color:black;
   max-width: 100%;
   box-sizing: border-box;
-  
-
-
+  margin-bottom: -8px;
 }
 
 .header-titie{
   font-weight: bold;
   font-size: 1.5em;
-
 }
 .header-buttons{
   display: flex;
@@ -24,17 +21,13 @@ header{
 }
   
 .login-btn{
-
 display: flex;
 align-items: center;
 justify-content: center;
 background-color: #ffff;
 color: rebeccapurple;
-
-
 border-radius: 8px;
 cursor: pointer;
-
 
 }
 .pageadd-btn{
