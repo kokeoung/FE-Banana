@@ -5,8 +5,7 @@ import img from "../../app/assets/cloud.png";
 import { useState } from "react";
 
 export default function MyPage(){
-  const userName = "가나다라"
-  const about = "간단한 자기소개를 해주세요"
+  const user = JSON.parse(localStorage.getItem('user'));
   const [active,setActive] = useState({
     myli1:"",
     myli2:"",
@@ -24,7 +23,7 @@ export default function MyPage(){
     <div className="my-container">
       <div className="my-header">
         <div className="my-profile">
-          <MyUserProfile profileImage={img} nickname={userName} about={about}/>
+          <MyUserProfile profileImage={user.profile} nickname={user.nick} about={user.about}/>
         </div>
       </div>
       <div className="my-main">
