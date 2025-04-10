@@ -7,10 +7,6 @@ import Logo from "../../app/assets/banana.png";
 export default function AuthPage(){
   
   const [check,setCheck] = useState(true);
-  
-  function handleClick(){
-    setCheck(!check)
-  }
 
   return(<>
   <div className="auth-wrap">
@@ -21,13 +17,13 @@ export default function AuthPage(){
           </div>
         </div>
         <div className="auth-main">
-          <div>
+          <div className=".auth-form">
             {check?<LoginForm />:<SignupForm />}
           </div>
           <div className="auth-check">
             {(check)
-            ?(<div>계정이 없다면&nbsp;<span className="auth-click" onClick={handleClick}>회원가입</span>&nbsp;해주세요</div>)
-            :(<div>계정이 있다면&nbsp;<span className="auth-click" onClick={handleClick}>로그인</span>&nbsp;해주세요</div>)}
+            ?(<div>계정이 없다면&nbsp;<span className="auth-click" onClick={() => setCheck(!check)}>회원가입</span>&nbsp;해주세요</div>)
+            :(<div>계정이 있다면&nbsp;<span className="auth-click" onClick={() => setCheck(!check)}>로그인</span>&nbsp;해주세요</div>)}
           </div>
         </div>
       </div>
