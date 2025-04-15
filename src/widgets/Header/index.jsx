@@ -26,8 +26,8 @@ export default function Header(){
       <FaUserCircle />
 
     </div>
-    <div>
-    <FaAngleDown />
+    <div className=''>
+    <FaAngleDown/>
     </div>
     </section>
     </header>
