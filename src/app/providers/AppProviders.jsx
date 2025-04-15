@@ -5,7 +5,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import MyPage from "../../pages/MyPage";
 import SimpleLayout from "../layouts/SimpleLayout";
 import WritePage from "../../pages/WritePage";
-import SearchPage from "../../pages/Search";
+import SearchPage from "../../pages/SearchPage";
 import ReadPage from "../../pages/ReadPage";
 import AuthPage from "../../pages/AuthPage";
 import TestPage from "../../pages/TestPage";

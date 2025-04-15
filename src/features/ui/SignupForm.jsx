@@ -2,22 +2,15 @@ import Button from "@shared/ui/Button"
 import Input from "@shared/ui/Input"
 import "./AuthForm.css"
 import { useState } from "react"
+import Modal from "../../shared/ui/modal"
+import { useNavigate } from "react-router-dom"
 
 export default function SignupForm() {
 
-  const [check,setCheck] = useState({
-    id:"",
-    pass:"",
-    passcheck:"",
-    nick:""
-  })
-
-  const [error,setError] = useState({
-    id:"",
-    pass:"",
-    passcheck:"",
-    nick:""
-  })
+  const [modalClose,setModalClose] = useState(false);
+  const [signupMsg,setSignupMsg] = useState("");
+  const [check,setCheck] = useState({id:"", pass:"", passcheck:"", nick:""})
+  const [error,setError] = useState({id:"", pass:"", passcheck:"", nick:""})
 
   function handleChange(e){
     const {name,value} = e.target;
@@ -26,7 +19,6 @@ export default function SignupForm() {
     }))
     validate(name,value)
   }
-  
   function validate(name,value){
     if(value == ""){
       return setError(prev => ({...prev,
@@ -54,23 +46,27 @@ export default function SignupForm() {
         }))
     }
   }
-
-  function handleClick(){
+  function handleSignupClick(){
     if(!(check.id&&check.pass&&check.passcheck&&check.nick)) {
-      console.log("빈값이 존재합니다");
+      setModalClose(true);
+      setSignupMsg("빈 정보가 존재합니다");
       return;
     }
     const isAllEmpty = Object.values(error).every(val => val === "");
     if(!isAllEmpty){
-      console.log("에러가 있습니다");
+      setModalClose(true);
+      setSignupMsg("입력 정보를 확인해주세요");
       return;
     }
-    console.log("성공!");
+    // 백엔드에 데이터를 저장하는 로직 구현
+    setModalClose(true);
+    setSignupMsg("회원가입 성공!");
   }
 
 
   return(<>
     <div className="auth-form-container">
+      <Modal isOpen={modalClose} onClose={() => setModalClose(false)}>{signupMsg}</Modal>
       <form>
         <div><Input name={"id"} placeholder={"아이디를 입력하세요"} 
                     onChange={handleChange} error={error.id}/></div>
@@ -80,7 +76,7 @@ export default function SignupForm() {
                     onChange={handleChange} error={error.passcheck}/></div>
         <div><Input name={"nick"} placeholder={"닉네임을 입력하세요"}
                     onChange={handleChange} error={error.nick}/></div>
-        <div><Button value={"회원가입"} onClick={handleClick} size={"m"}/></div>   
+        <div><Button value={"회원가입"} onClick={handleSignupClick} size={"m"}/></div>   
       </form>
     </div>
   </>)
