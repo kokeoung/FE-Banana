@@ -1,64 +1,129 @@
-
-.post-detail{
-  background-color: rgb(248, 249, 250) ;
-}
-.post-detail-content{
-  font-size: 2.25rem;
-  line-height: 1.5;
-  letter-spacing: -0.004em;
-  margin-top: 0;
-  font-weight: 800;
-  color: black;
-  text-align: center;
-  background-color: rgb(248, 249, 250) ;
-  
-}
-.post-information{
-  text-align: center;
-  
-  
-}
-.username{
-  text-align: left;
-
-  
-}
-
-.user-info{
+/* 제목 정렬 */
+.post-detail-content {
   display: flex;
-  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.post-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
 
+/* 유저 정보 + 버튼 묶음 */
+.user-info-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.username {
+  
+  font-weight: bold;
+
+}
+.date {
+  color: #555;
+  
+}
+.user-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 이미지 중앙 정렬 */
+  margin-top: 40px;
+  position: relative;
+}
+
+.post-meta {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-info-box {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.follow-btn,
+.heart-btn {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* 이미지 중앙 */
+.cord-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8ff;
+  
+}
+/* 이미지 wrapper는 기준점 역할 */
+.image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   
 }
-.flow-btn{
-  position: fixed;
-  
-  left: 65%;
-  padding: 2px 3px;
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-  cursor: pointer;
+
+/* 이미지 위에 겹치는 유저 정보 박스 */
+.user-info-overlay {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 16px;
+  display: flex;
   justify-content: space-between;
-
-
+  padding: 0 20px;
 }
-.heart-btn{
-  left: 82%;
+
+/* 이미지 자체 */
+.read-img1 {
+  display: block;
+  max-width: 600px;
+  width: 100%;
+  
+  border-radius: 20px;
+  
+}
+
+
+/* 버튼 패널 (고정 위치) */
+.btn-icon-panel {
   position: fixed;
-  
-  justify-items: right;
-  padding: 2px 3px;
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-  cursor: pointer;
-}
+  left: 30px;                      /* 왼쪽에서 30px 떨어진 위치 */
+  top: 50%;                        /* 화면 높이의 50% 지점 */
+  transform: translateY(-50%);     /* 자기 높이의 절반만큼 위로 이동 (정중앙) */
 
-
-.btn-icon-panel{
-  
   background-color: #f8f9fa;
   border-radius: 30px;
   padding: 10px 0;
@@ -67,11 +132,10 @@
   align-items: center;
   gap: 5px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  
-  
-  left: 30px;
-  position: fixed;
+  z-index: 10;
 }
+
+
 .btn-icon-Wrapper{
   background-color: white;
   border-radius: 50%;
@@ -93,40 +157,3 @@
   font-size: 14px;
   color: #333;
 }
-.body-cord{
-  background-color: white;
-  border-radius: 20px;
-  padding: 40px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cord-area{
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  min-height:auto;
-  background-color: #f8f8ff;
-}
-
-.image-wrapper{ /*div*/
-  display:flex ;
-  justify-content: center; 
-  align-items: center;     
-  margin:auto;
-  padding: 40px 0;
-}
-
-.read-img1{  /*img*/
-  display: flex;
-  width: 600px;
-  justify-content: center; 
-  align-items: center;    
-  height: 500px;
-  border-radius: 12px;
-  left: 50%;
-}
-
