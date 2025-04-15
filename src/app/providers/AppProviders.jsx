@@ -13,8 +13,6 @@ import About from "../../features/ui/MyFrom/About";
 import Series from "../../features/ui/MyFrom/Series";
 import Posts from "../../features/ui/MyFrom/Posts";
 
-
-
 const router=createBrowserRouter([
   {
     path:"/",

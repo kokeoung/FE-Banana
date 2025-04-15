@@ -2,12 +2,18 @@ import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import Button from '../../shared/ui/Button';
 
 
 
 export default function Header(){
-  {}
+  const navigate = useNavigate();
+
+  const handleWriteClick = () => {
+    navigate('/write');
+  };
+  
   return(<>
   <header className='header'>
     <h1 className='header-titie'>해더</h1>
@@ -17,7 +23,7 @@ export default function Header(){
     <CgSearch />
     </div>
     <div className='pageadd-btn'>
-    <Button size={"m"}  value="새 글 작성"/> 
+    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
     </div>
     <div className='login-btn'>
     <Button size={"m"} value="로그인"/>
