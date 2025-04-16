@@ -2,7 +2,6 @@ import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
 import Button from '../../shared/ui/Button';
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
 import { Link, useNavigate } from 'react-router-dom';
@@ -60,7 +59,7 @@ export default function Header(){
     <div className='pageadd-btn'>
 
       
-    <Button size={"m"}  value="새 글 작성"/> 
+    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
 
     </div>
     <div className='login-btn'>
