@@ -1,7 +1,7 @@
-import 'github-markdown-css/github-markdown-light.css';
+// import 'github-markdown-css/github-markdown-light.css';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { marked } from 'marked';
+// import { marked } from 'marked';
 import { applyHeader, wrapWith } from './markdownUtils';
 import './WritePage.css';
 
