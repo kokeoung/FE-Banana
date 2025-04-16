@@ -2,6 +2,7 @@ import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import Button from '../../shared/ui/Button';
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,26 +12,15 @@ import { useState } from 'react';
 
 
 
-const seachneaxtpage = () => {
-  setNextsearch("../../pages/SearchPage/index")
-}
-
-  
-
-
-
-
-
-
 export default function Header(){
   // Context에서 현재 페이지 정보 가져오기
   const { pageInfo } = usePageContext();
+
   const navigate = useNavigate();
 
-  const headerIcononClick = () =>{
-    navigate("/Search");
-  }
-  
+  const handleWriteClick = () => {
+    navigate('/write');
+  };
   
   return(<>
   <header className='header'>
@@ -62,16 +52,15 @@ export default function Header(){
     
     </div>
     <div className='pageadd-btn'>
+
       
     <Button size={"m"}  value="새 글 작성"/> 
+
     </div>
     <div className='login-btn'>
       
       
       <Button size={"m"} value="로그인"/>
-      
-    
-    
     </div>
     <div className='user-icon' >
       <FaUserCircle />

@@ -1,16 +1,20 @@
-import 'github-markdown-css/github-markdown-light.css';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Editor } from '@toast-ui/react-editor';
 import { marked } from 'marked';
-import { applyHeader, wrapWith } from './markdownUtils';
+marked.setOptions({
+  breaks: true
+});
+import '@toast-ui/editor/dist/toastui-editor.css';
 import './WritePage.css';
+import './Markdown.css';
 
 export default function WritePage() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const textareaRef = useRef(null);
   const Navigate = useNavigate();
+  const editorRef = useRef();
 
   // 나가기 버튼
   const handleExit = () => {
@@ -27,30 +31,15 @@ export default function WritePage() {
     }
   };
 
-  const handleHeaderClick = (level) => {
-    const textarea = textareaRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const newText = applyHeader(content, start, end, level);
-    setContent(newText);
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(end + level + 2, end + level + 2);
-    }, 0);
+  const handleChange = () => {
+    const editorContent = editorRef.current.getInstance().getMarkdown();
+    setContent(editorContent);
   };
-  
-  // Bold, Italic, Strikethrough 적용
-  const handleWrapClick = (wrapper) => {
-    const textarea = textareaRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const newText = wrapWith(content, start, end, wrapper);
-    setContent(newText);
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(start + wrapper.length, end + wrapper.length);
-    }, 0);
-  };
+
+  useEffect(() => {
+    // 마운트 후 한 번 비워줌
+    editorRef.current?.getInstance().setMarkdown('');
+  }, []);
 
   return(
     <div className="editor-wrapper">
@@ -67,33 +56,23 @@ export default function WritePage() {
 
         <div className="editor-title-underline" />
 
-        <div className="editor-toolbar">
-          {/* 제목 크기 */}
-          <button onClick={() => handleHeaderClick(1)}>H1</button>
-          <button onClick={() => handleHeaderClick(2)}>H2</button>
-          <button onClick={() => handleHeaderClick(3)}>H3</button>
-          <button onClick={() => handleHeaderClick(4)}>H4</button>
-          <span>|</span>
-          {/* 텍스트스타일 */}
-          <button onClick={() => handleWrapClick('**')}>B</button>
-          <button onClick={() => handleWrapClick('*')}>I</button>
-          <button onClick={() => handleWrapClick('~~')}>-T-</button>
-          <span>|</span>
-          {/* 인용 / 링크/ 이미지삽입 / 코드 */}
-          <button>″</button>
-          <button>🔗</button>
-          <button>📷</button>
-          <button>{ '<>' }</button>
+        <div className="editor-container">
+          <Editor 
+            placeholder="당신의 이야기를 적어보세요!!"
+            height="720px"
+            useCommandShortcut={true}
+            onChange={handleChange}
+            ref={editorRef}
+            initialEditType="markdown"  // 마크다운 모드
+            hideModeSwitch={true} 
+            initialValue=""
+            toolbarItems={[
+              ['heading', 'bold', 'italic', 'strike'],
+              ['hr', 'quote'],
+              ['image', 'link', 'code', 'codeblock'],
+            ]}
+          />
         </div>
-
-        {/* 본문작성 영역 */}
-        <textarea
-          ref={textareaRef}
-          className="editor-content"
-          placeholder="당신의 이야기를 적어보세요!"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
 
         {/* 임시저장, 작성완료 버튼 영역 */}
         <div className="editor-footer">
@@ -105,14 +84,14 @@ export default function WritePage() {
         </div>
       </div>
 
-        {/* 오른쪽 마크다운 html번역 영역 (내가 작성한 글이 html로 번역되서 화면에 보임) */}
-        <div className="editor-right">
-          <h1>{title}</h1>
-          <div
-            className="markdown-body"
-            dangerouslySetInnerHTML= {{ __html: marked(content) }}
-          />
-        </div>
+      {/* 오른쪽 마크다운 html번역 영역 (내가 작성한 글이 html로 번역되서 화면에 보임) */}
+      <div className="editor-right">
+        <h1>{title}</h1>
+        <div
+          className="markdown-body"
+          dangerouslySetInnerHTML={{ __html: marked(content) }}
+        />
+      </div>
     </div>        
   );
 };

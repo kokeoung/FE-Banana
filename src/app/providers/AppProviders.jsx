@@ -14,8 +14,6 @@ import Series from "../../features/ui/MyFrom/Series";
 import Posts from "../../features/ui/MyFrom/Posts";
 import { PageProvider } from "./PageContext";
 
-
-
 const router=createBrowserRouter([
   {
     path:"/",
