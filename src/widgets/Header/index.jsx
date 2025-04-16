@@ -4,10 +4,18 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Button from '../../shared/ui/Button';
+import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
+import { Link, useNavigate } from 'react-router-dom';
+import  SearchPage  from  '../../pages/SearchPage/index';
+import { useState } from 'react';
+
 
 
 
 export default function Header(){
+  // Context에서 현재 페이지 정보 가져오기
+  const { pageInfo } = usePageContext();
+
   const navigate = useNavigate();
 
   const handleWriteClick = () => {
@@ -24,23 +32,47 @@ export default function Header(){
   
   return(<>
   <header className='header'>
-    <h1 className='header-titie'>해더</h1>
+    
+    <p className='header-titie'>
+      {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
+      {pageInfo.isHome ?
+        (<Link to="/">Banana</Link>) : 
+        (
+        <>
+          <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
+          {/* 작성자가 있으면 @작성자명 표시 */}
+          {pageInfo.author && (
+            <span className="author-link">@{pageInfo.author}</span>
+          )}
+        </>
+      )}
+    </p>
+      
+    
+
     
     <section className='header-buttons'>
     <div className='seach-icon'>
+
     <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
+
     </div>
     <div className='pageadd-btn'>
-    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
+
+      
+    <Button size={"m"}  value="새 글 작성"/> 
+
     </div>
     <div className='login-btn'>
+
     <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
+
     </div>
     <div className='user-icon' >
       <FaUserCircle />
     </div>
-    <div>
-    <FaAngleDown />
+    <div className=''>
+    <FaAngleDown/>
     </div>
     </section>
     </header>
