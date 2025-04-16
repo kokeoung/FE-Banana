@@ -55,7 +55,7 @@
     padding-bottom: 1.7rem;
     margin-bottom: 1rem;
     outline: none;
-    background-color: transparent;
+    background-color: white;
 }
 
 .editor-title::placeholder {
