@@ -212,7 +212,7 @@ export default function ReadPage() {
           value={post.author.isFollowing ? "팔로잉" : "팔로우"} 
         />
       </section>
-
+      {/* 폴더 구분 만들기 : 댓글 폴더 생성하고 넣기*/}
       {/* 4. 댓글 작성 폼 */}
       <section className="comment-form">
         <textarea placeholder="댓글을 작성하세요" />
