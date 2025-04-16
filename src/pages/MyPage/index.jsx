@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function MyPage(){
   const user = JSON.parse(localStorage.getItem('user'));
+  
   const [active,setActive] = useState({
     myli1:"",
     myli2:"",
@@ -16,14 +17,14 @@ export default function MyPage(){
     const {id} = e.currentTarget;
     setActive({myli1:"",myli2:"",myli3:""})
     setActive(prev => ({...prev,[id]:"active"}))
-    console.log(active.myli1,active.myli2,active.myli3)
+    console.log(user);
   }
 
   return(<>
     <div className="my-container">
       <div className="my-header">
         <div className="my-profile">
-          <MyUserProfile profileImage={user.profile} nickname={user.nick} about={user.about}/>
+          <MyUserProfile profileImage={user.userProfile} nickname={user.userNick} about={user.userAbout}/>
         </div>
       </div>
       <div className="my-main">
