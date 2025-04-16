@@ -19,7 +19,8 @@ export default function SearchPage() {
   //768px 이상일 때는 아이콘 크기 1.3, 그 외엔 1.0
   const dynamicStrokeWidth = windowWidth >= 768 ? 1.3 : 1.0;
 
-  return (<>
+  return (
+    <>
     <div className="search-container">
       <form className="search-bar" onSubmit={() => false}
         style={{
@@ -37,5 +38,6 @@ export default function SearchPage() {
         />
       </form>
     </div>
-  </>)
-}
+    </>
+  );
+};

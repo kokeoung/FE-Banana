@@ -21,6 +21,14 @@ export default function Header(){
   const handleWriteClick = () => {
     navigate('/write');
   };
+
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
+
+  const handleLoginClick = () => {
+    navigate('/auth')
+  };
   
   return(<>
   <header className='header'>
@@ -45,11 +53,9 @@ export default function Header(){
     
     <section className='header-buttons'>
     <div className='seach-icon'>
-      
-      <CgSearch />
-      
-      
-    
+
+    <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
+
     </div>
     <div className='pageadd-btn'>
 
@@ -58,13 +64,12 @@ export default function Header(){
 
     </div>
     <div className='login-btn'>
-      
-      
-      <Button size={"m"} value="로그인"/>
+
+    <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
+
     </div>
     <div className='user-icon' >
       <FaUserCircle />
-
     </div>
     <div className=''>
     <FaAngleDown/>
