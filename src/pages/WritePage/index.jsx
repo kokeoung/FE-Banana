@@ -1,7 +1,7 @@
-import 'github-markdown-css/github-markdown-light.css';
+// import 'github-markdown-css/github-markdown-light.css';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { marked } from 'marked';
+// import { marked } from 'marked';
 import { applyHeader, wrapWith } from './markdownUtils';
 import './WritePage.css';
 
@@ -87,7 +87,6 @@ export default function WritePage() {
         </div>
 
         {/* 본문작성 영역 */}
-        <span id="italics"></span>
         <textarea
           ref={textareaRef}
           className="editor-content"
