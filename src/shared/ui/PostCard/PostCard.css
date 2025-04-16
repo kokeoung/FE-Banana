@@ -1,49 +1,49 @@
-.post-card{ 
+.postcard-card{ 
   background-color: #fff;
   height: 380px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.post-card > .post-header{
+.postcard-card > .postcard-header{
   height: 180px;
 }
 
-.post-card > .post-header > .post-img{
+.postcard-card > .postcard-header > .postcard-img{
   height: inherit;
   width: 100%;
   object-fit:cover;
 }
 
-.post-card > .post-main{
+.postcard-card > .postcard-main{
   height: 160px;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
-.post-card > .post-main > .post-title{
+.postcard-card > .postcard-main > .postcard-title{
   font-weight: 1000;
   font-size: 16px;
 }
 
-.post-card > .post-main > .post-date{
+.postcard-card > .postcard-main > .postcard-date{
   font-size: 12px;
   color: #999;
 }
 
-.post-card > .post-footer{
+.postcard-card > .postcard-footer{
   padding: 0 13px;
   height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.post-card > .post-footer > .post-like {
+.postcard-card > .postcard-footer > .postcard-like {
   display: flex;
   font-size: 12px;
   gap: 5px;
 }
-.post-card > .post-footer > .post-child{
+.postcard-card > .postcard-footer > .postcard-child{
   height: inherit;
 }
