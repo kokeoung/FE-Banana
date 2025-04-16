@@ -1,21 +1,17 @@
 import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import { FaAngleDown } from "react-icons/fa";
+import { useState, useRef, useEffect } from 'react';
 import Button from '../../shared/ui/Button';
-import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
-import { Link, useNavigate } from 'react-router-dom';
-import  SearchPage  from  '../../pages/SearchPage/index';
-import { useState } from 'react';
 
-
-
+const filterOptions = ['내 블로그', '새 글 작성', '임시 글', '로그아웃'];
 
 export default function Header(){
-  // Context에서 현재 페이지 정보 가져오기
-  const { pageInfo } = usePageContext();
-
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleWriteClick = () => {
     navigate('/write');
@@ -28,52 +24,68 @@ export default function Header(){
   const handleLoginClick = () => {
     navigate('/auth')
   };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(prev => !prev);
+  };
   
+  const handleOptionClick = (option) => {
+    setIsDropdownOpen(false);
+    if (option === '내 블로그') navigate('/my');
+    else if (option === '새 글 작성') navigate('/write');
+    else if (option === '임시 글') navigate('/my'); // 임시로 마이페이지로 설정 
+    else if (option === '로그아웃') alert("로그아웃 처리"); // 나중에 로직 연결
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return(<>
   <header className='header'>
+    <h1 className='header-titie'>해더</h1>
     
-    <p className='header-titie'>
-      {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
-      {pageInfo.isHome ?
-        (<Link to="/">Banana</Link>) : 
-        (
-        <>
-          <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
-          {/* 작성자가 있으면 @작성자명 표시 */}
-          {pageInfo.author && (
-            <span className="author-link">@{pageInfo.author}</span>
+      <section className='header-buttons'>
+
+        <div className='headersearch-icon'>
+          <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
+        </div>
+
+        <div className='pageadd-btn'>
+          <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
+        </div>
+
+        <div className='login-btn'>
+          <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
+        </div>
+
+        <div className='user-icon' >
+          <FaUserCircle />
+        </div>
+
+        <div className='header-filter' ref={dropdownRef}>
+          <button className="dropdown-toggle" onClick={toggleDropdown}>
+            <FaAngleDown />
+          </button>
+
+          {isDropdownOpen && (
+            <div className="dropdown-menu">
+              {filterOptions.map(option => (
+                <div key={option} className="dropdown-item" onClick={() => handleOptionClick(option)}>
+                  {option}
+                </div>
+              ))}
+            </div>
           )}
-        </>
-      )}
-    </p>
-      
-    
-
-    
-    <section className='header-buttons'>
-    <div className='seach-icon'>
-
-    <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
-
-    </div>
-    <div className='pageadd-btn'>
-
-      
-    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
-
-    </div>
-    <div className='login-btn'>
-
-    <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
-
-    </div>
-    <div className='user-icon' >
-      <FaUserCircle />
-    </div>
-    <div className=''>
-    <FaAngleDown/>
-    </div>
-    </section>
+        </div>
+      </section>
     </header>
   </>)
 }
