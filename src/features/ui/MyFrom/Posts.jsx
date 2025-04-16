@@ -2,6 +2,7 @@ import { IoSearchOutline } from "react-icons/io5"
 import "./MyFrom.css"
 import { useState } from "react"
 import MyPostCard from "../../../shared/ui/MyPostCard"
+import none from "../../../app/assets/notcontent.svg"
 
 const dummy = [
   {
@@ -9,7 +10,7 @@ const dummy = [
     title: '테스트1',
     img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
     createdAt: '2025년 04월 06일',
-    content:"동해물과 백두산이 마르고 닳도록",
+    content:"길어져도 문제 없는지 테스트 길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트길어져도 문제 없는지 테스트",
     like: 12,
   },
   {
@@ -31,7 +32,6 @@ const dummy = [
 ]
 
 
-
 export default function Posts(){
 
   const [color,setColor] = useState("")
@@ -40,7 +40,6 @@ export default function Posts(){
   const filteredData = dummy.filter(post =>
     post.title.toLowerCase().includes(search.toLowerCase())
   );
-
   return(<>
     <div className="postspage-container">
       <div className="postspage-header">
@@ -50,16 +49,21 @@ export default function Posts(){
             onFocus={() => setColor("postspage-focus")} onBlur={() => setColor("")} onChange={e => setSearch(e.target.value)}/>
         </div>
       </div>
-      <div className="postspage-main">
-        {filteredData.map(post=>(
-          <MyPostCard key={post.id} 
-            imageUrl={post.img} 
-            title={post.title} 
-            content={post.content} 
-            createdAt={post.createdAt} 
-            liked={post.like} />
-        ))}
-      </div>
+      {dummy?
+      (<div className="postspage-worng">
+        <img src={none} alt="" />
+      </div>):
+      (<div className="postspage-main">
+      {filteredData.map(post=>(
+        <MyPostCard key={post.id} 
+          imageUrl={post.img} 
+          title={post.title} 
+          content={post.content} 
+          createdAt={post.createdAt} 
+          liked={post.like} />
+      ))}
+      </div>)
+      }
     </div>
   </>)
 }
