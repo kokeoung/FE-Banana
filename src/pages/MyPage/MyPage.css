@@ -6,9 +6,9 @@
   border-bottom: 1px solid #ddd;
   height: 160px;
 }
-.my-container > .my-main{
+/* .my-container > .my-main{
   
-}
+} */
 .my-container > .my-main > ul{
   display: flex;
   justify-content: center;

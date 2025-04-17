@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    height: 100vh;
 }
 
 /* 오른쪽 입력 영역 */
