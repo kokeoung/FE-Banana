@@ -59,7 +59,7 @@ export default function LoginForm(){
           return;
         } 
         setModalClose(false);
-        navigate("/my");
+        navigate("/");
     }
 
     return (<>
