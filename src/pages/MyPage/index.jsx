@@ -1,13 +1,19 @@
 import { Link, Outlet, useParams } from "react-router-dom";
 import "./MyPage.css"
 import MyUserProfile from "../../shared/ui/MyUserProfile";
-import img from "../../app/assets/cloud.png";
 import { useEffect, useState } from "react";
+import Modal from "../../shared/ui/Modal";
+import Input from "../../shared/ui/Input"
 
 export default function MyPage(){
   const { userId } = useParams();
-  const [active,setActive] = useState({myli1:"",myli2:"",myli3:""});
+  const [active,setActive] = useState({myli1:"active",myli2:"",myli3:""});
   const [user,setUser] = useState([""]);
+  const [modalClose,setModalClose] = useState(false);
+  const [nick,setNick] = useState("");
+  const [about,setAbout] = useState("");
+  const [file, setFile] = useState(null);
+  const [err,setErr] = useState("");
 
   useEffect(() => {
       
@@ -24,7 +30,6 @@ export default function MyPage(){
             body: JSON.stringify(sendData)
         }
         const response = await fetch(url, init);
-        console.log(userId)
         const data = await response.json();
         setUser(data);
       } catch (err) {
@@ -56,6 +61,24 @@ export default function MyPage(){
     setActive({myli1:"",myli2:"",myli3:""})
     setActive(prev => ({...prev,[id]:"active"}))
   }
+  async function handleChangeUserData(){
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("userNick", nick);
+      formData.append("userAbout", about);
+      formData.append("userProfile", file); // File 객체
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData, // Content-Type 자동 설정됨 
+    });
+    const data = await response.json();
+      
+    } catch(err) {
+
+    }
+  }
 
   return(<>
     <div className="my-container">
@@ -63,7 +86,20 @@ export default function MyPage(){
         <div className="my-profile">
           <MyUserProfile profileImage={user.userProfile} nickname={user.userNick} about={user.userAbout}/>
         </div>
+        <div className="my-setting-btn">
+          <button onClick={()=>{setModalClose(true)}}>정보 수정</button>
+        </div>
       </div>
+      <Modal isOpen={modalClose} onClose={()=>{setModalClose(false);handleChangeUserData();}}>
+        <div className="my-setting">
+          <form >
+            프로필 수정
+            <input type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>           
+            <Input onChange={(e)=>{setNick(e.target.value)}} error={err} placeholder={"수정할 닉네임"}/>
+            <Input onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
+          </form>
+        </div>
+      </Modal>
       <div className="my-main">
         <ul>
           <li className={`my-nav-${active.myli1}`} onClick={handleClick} id="myli1">
