@@ -2,26 +2,36 @@ import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+
 import Button from '../../shared/ui/Button';
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
 import { Link, useNavigate } from 'react-router-dom';
-import  SearchPage  from  '../../pages/SearchPage/index';
-import { useState } from 'react';
 
+
+  // Context에서 현재 페이지 정보 가져오기
 
 
 
 export default function Header(){
   // Context에서 현재 페이지 정보 가져오기
-  const { pageInfo } = usePageContext();
 
-  const navigate = useNavigate();
 
-  const handleWriteClick = () => {
-    navigate('/write');
-  };
-  
+    const { pageInfo } = usePageContext();
+
+    const navigate = useNavigate();
+
+    const handleWriteClick = () => {
+      navigate('/write');
+    };
+
+    const handleSearchClick = () => {
+      navigate('/search');
+    };
+
+    const handleLoginClick = () => {
+      navigate('/auth')
+    };
+    
   return(<>
   <header className='header'>
     
@@ -46,7 +56,7 @@ export default function Header(){
     <section className='header-buttons'>
     <div className='seach-icon'>
       
-      <CgSearch />
+    <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
       
       
     
@@ -54,20 +64,27 @@ export default function Header(){
     <div className='pageadd-btn'>
 
       
-    <Button size={"m"}  value="새 글 작성"/> 
+    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
 
     </div>
+    
     <div className='login-btn'>
       
       
-      <Button size={"m"} value="로그인"/>
+    <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
     </div>
+    {/* 유저아이콘 버튼  클릭하면 유저 페이지 창 링크 이동 */}
     <div className='user-icon' >
       <FaUserCircle />
 
     </div>
-    <div className=''>
-    <FaAngleDown/>
+    <div className='header-user-filter'>
+    <button className='header-filter'><FaAngleDown /></button>
+    <ul>
+      <li className='header-mypage' >마이페이지</li>
+      <li className='header-writepage' >새 글 작성</li>
+      <li className='header-logout'>로그아웃</li>
+    </ul>
     </div>
     </section>
     </header>
