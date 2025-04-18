@@ -1,8 +1,13 @@
 .search-results {
   background-color: rgb(248, 249, 250);
   min-height: 100vh;
+  max-width: 768px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
-.search-result-item{
+
+.search-result-item {
   padding-bottom: 4rem;
   line-height: 1.5;
 }
@@ -17,7 +22,8 @@
   font-weight: bold;
   color: black;
 }
-.search-result-divider{
+
+.search-result-divider {
   height: 1px;
   background-color: rgb(220, 220, 220);
   margin-top: 2.5rem;
@@ -29,16 +35,17 @@
   color: #495057;
 }
 
-@media (max-width:768px){
-  .search-result-item{
+@media (max-width:768px) {
+  .search-result-item {
     padding-bottom: 2rem;
   }
-  .search-message{
+
+  .search-message {
     margin: 1rem 0 1rem 0;
     font-size: 1rem;
   }
 
-  .search-result-divider{
+  .search-result-divider {
     margin-top: 1.5rem;
   }
 }

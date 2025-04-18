@@ -1,3 +1,4 @@
+// 더미데이터 컴포넌트 할 때 props 없이 쓸 수 있어서 zustand를 쓰면 간편함
 import { create } from "zustand";
 
 const authors = {
