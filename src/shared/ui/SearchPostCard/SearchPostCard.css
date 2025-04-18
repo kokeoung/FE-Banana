@@ -1,0 +1,63 @@
+.search-post-card {
+  padding-top: 0;
+  line-height: 1.5;
+}
+.search-post-user-info{
+  display: flex;
+  align-items: center;
+}
+
+.search-post-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.search-post-content {
+  padding: 1rem 0 1rem 0;
+}
+
+.search-post-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #212529;
+}
+
+.search-post-likes {
+  font-size: 0.9rem;
+  color: #868e96;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.search-post-excerpt{
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #495057;
+  word-break: keep-all;
+  -webkit-line-clamp: 4; /* 줄 수 제한 */
+  -webkit-box-orient: vertical;
+}
+
+.search-post-meta {
+  font-size: 0.85rem;
+  color: #868e96;
+  margin-top: 0.3rem;
+}
+
+@media (max-width:768px) {
+  .search-post-title{
+    font-size: 1rem;
+  }
+  .search-post-excerpt{
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+  .search-post-meta{
+    font-size: 0.75rem;
+  }
+}
+
