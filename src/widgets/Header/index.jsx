@@ -8,7 +8,6 @@ import { usePageContext } from '../../app/providers/PageContext';  // Context �
 import { Link, useNavigate } from 'react-router-dom';
 
 
-  // Context에서 현재 페이지 정보 가져오기
 
 
 
@@ -79,12 +78,8 @@ export default function Header(){
 
     </div>
     <div className='header-user-filter'>
-    <button className='header-filter'><FaAngleDown /></button>
-    <ul>
-      <li className='header-mypage' >마이페이지</li>
-      <li className='header-writepage' >새 글 작성</li>
-      <li className='header-logout'>로그아웃</li>
-    </ul>
+    <FaAngleDown />
+    <button>버튼 </button>
     </div>
     </section>
     </header>
