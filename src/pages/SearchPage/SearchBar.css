@@ -75,3 +75,9 @@
         left: 0.8rem;
     }
 }
+.search-result{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}

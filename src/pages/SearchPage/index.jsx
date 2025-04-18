@@ -12,8 +12,7 @@ export default function SearchPage() {
   const navigate = useNavigate();
   const inputRef=useRef(null);
 
-  const isSearching = !!searchParams.get('q'); //검색어가 있을 경우 true
-
+  const isSearching = !!searchParams.get('q'); //검색어가 있을 경우 trueq
   //URL의 q 파라미터 값과 상태 동기화
   useEffect(() => {
     const query = searchParams.get('q') || '';
@@ -85,7 +84,9 @@ export default function SearchPage() {
           />
         </form>
       </div>
-      {isSearching && <SearchResults />}
+      <div className="search-result">
+        {isSearching && <SearchResults />}
+      </div>
     </div>
     </>);
 };
