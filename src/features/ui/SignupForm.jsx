@@ -2,7 +2,7 @@ import Button from "@shared/ui/Button"
 import Input from "@shared/ui/Input"
 import "./AuthForm.css"
 import { useState } from "react"
-import Modal from "../../shared/ui/modal"
+import Modal from "../../shared/ui/Modal"
 import { useNavigate } from "react-router-dom"
 
 export default function SignupForm() {

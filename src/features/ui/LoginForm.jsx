@@ -3,7 +3,7 @@ import Input from "@shared/ui/Input"
 import "./AuthForm.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Modal from "../../shared/ui/modal"
+import Modal from "../../shared/ui/Modal"
 
 export default function LoginForm(){
 
@@ -59,7 +59,7 @@ export default function LoginForm(){
           return;
         } 
         setModalClose(false);
-        navigate("/my");
+        navigate("/");
     }
 
     return (<>

@@ -1,23 +1,82 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import "./MyPage.css"
 import MyUserProfile from "../../shared/ui/MyUserProfile";
-import img from "../../app/assets/cloud.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Modal from "../../shared/ui/Modal";
+import Input from "../../shared/ui/Input"
 
 export default function MyPage(){
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { userId } = useParams();
+  const [active,setActive] = useState({myli1:"active",myli2:"",myli3:""});
+  const [user,setUser] = useState([""]);
+  const [modalClose,setModalClose] = useState(false);
+  const [nick,setNick] = useState("");
+  const [about,setAbout] = useState("");
+  const [file, setFile] = useState(null);
+  useEffect(() => {
+      
+    async function fetchUser(){
+      try {
+        // setIsLoading(true);
+        const url = `http://localhost:8080/api/my/${userId}`;
+        const sendData = {
+            userId: userId,
+        }
+        const init = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(sendData)
+        }
+        const response = await fetch(url, init);
+        const data = await response.json();
+        setUser(data);
+      } catch (err) {
+        // setError(err);
+      } finally {
+        // setIsLoading(false);
+      }
+      };
+      fetchUser();
   
-  const [active,setActive] = useState({
-    myli1:"",
-    myli2:"",
-    myli3:""
-  })
-
+      // 헤더 정보 업데이트
+      // setPageInfo({
+      //   title: 'B',
+      //   author: post.author.username,
+      //   isHome: false
+      // });
+      
+      // 컴포넌트 언마운트 시 헤더 정보 초기화
+      // return () => {
+      //   setPageInfo({
+      //     title: 'Banana',
+      //     author: null,
+      //     isHome: true
+      //   });
+    // };
+  }, []);
   function handleClick(e){
     const {id} = e.currentTarget;
     setActive({myli1:"",myli2:"",myli3:""})
     setActive(prev => ({...prev,[id]:"active"}))
-    console.log(user);
+  }
+  async function handleChangeUserData(){
+    const url = `http://localhost:8080/api/my/change/${userId}`;
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("userNick", nick);
+      formData.append("userAbout", about);
+      formData.append("userProfile", file); // File 객체
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData, // Content-Type 자동 설정됨 
+    });
+    const data = await response.json();
+      
+    } catch(err) {
+
+    }
   }
 
   return(<>
@@ -26,17 +85,36 @@ export default function MyPage(){
         <div className="my-profile">
           <MyUserProfile profileImage={user.userProfile} nickname={user.userNick} about={user.userAbout}/>
         </div>
+        <div className="my-setting-btn">
+          <button onClick={()=>{setModalClose(true)}}>정보 수정</button>
+        </div>
       </div>
+      <Modal isOpen={modalClose} onClose={()=>{setModalClose(false);handleChangeUserData();}}>
+        <div className="my-setting">
+          <form className="my-form-container">
+            <div>
+              프로필 수정
+              <input type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
+            </div>   
+            <div>
+              <Input onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>
+            </div>     
+            <div>
+              <Input onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
+            </div>         
+          </form>
+        </div>
+      </Modal>
       <div className="my-main">
         <ul>
           <li className={`my-nav-${active.myli1}`} onClick={handleClick} id="myli1">
-            <Link to={'/my/posts'}>글</Link>
+            <Link to={`/my/${userId}/posts`}>글</Link>
           </li>
           <li className={`my-nav-${active.myli2}`} onClick={handleClick} id="myli2">
-            <Link to={'/my/series'}>시리즈</Link>
+            <Link to={`/my/${userId}/series`}>시리즈</Link>
           </li>
           <li className={`my-nav-${active.myli3}`} onClick={handleClick} id="myli3">
-            <Link to={'/my/about'}>소개</Link>
+            <Link to={`/my/${userId}/about`}>소개</Link>
           </li>
         </ul>
       </div>

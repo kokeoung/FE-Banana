@@ -4,11 +4,32 @@
 }
 .my-container > .my-header{
   border-bottom: 1px solid #ddd;
-  height: 160px;
+  height: inherit;
+  padding-bottom: 10px;
 }
-/* .my-container > .my-main{
+
+.my-container > .my-header > .my-setting-btn{
+  display: flex;
   
-} */
+}
+.my-container > .my-header > .my-setting-btn > button{
+  margin-left: auto;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(255, 217, 2);
+  color: black;
+  width: 65px;
+  height: 25px;
+  font-size: 12px;
+  
+}
+.my-container > .my-header > .my-setting-btn > button:hover{
+  background-color: rgb(255, 217, 2);
+  border: 2px solid black;
+  color: black;
+  font-weight: 500;
+}
+
 .my-container > .my-main > ul{
   display: flex;
   justify-content: center;
@@ -36,5 +57,21 @@
 .my-container > .my-main > ul > .my-nav-active {
   color: rgb(238, 202, 0);
   border-bottom: 2px solid rgb(238, 202, 0);
+}
+.my-form-container{
+  display: flex;
+  flex-direction: column;
+}
+.my-form-container > div{
+  margin-bottom: 5px;
+  width: 230px;
+  font-size: 14px;
+}
+.my-form-container > div >input{
+  border:1px solid #bbb;
+  width: 230px;
+  height: 25px;
+  border-radius: 10px;
+
 }
 
