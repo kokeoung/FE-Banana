@@ -1,45 +1,64 @@
+/* 에디터 전체 UI */
 .toastui-editor-defaultUI {
-    background-color: transparent;
     border: none;
     box-shadow: none;
     font-size: inherit;
+    background-color: white !important; /* 전체 배경 흰색 */
 }
 
+/* 입력 영역 전체 컨테이너 */
+.toastui-editor-defaultUI .toastui-editor-md-container,
+.toastui-editor-contents {
+    background-color: white !important;
+}
+
+/* 툴바 배경 */
 .toastui-editor-defaultUI-toolbar {
-    background-color: white;
+    background-color: white !important;
     border: none;
 }
 
+/* 오른쪽 렌더링 영역 (preview) */
 .markdown-body {
-    background-color: transparent;
     padding: 0;
     margin: 0;
-    box-shadow: none;
+    background-color: rgb(248, 249, 250) !important;
     border: none;
+    box-shadow: none;
+    font-size: 18px !important;
+    line-height: 1.7 !important;
 }
 
+/* 공통 폰트 스타일 */
 .toastui-editor-contents,
 .markdown-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Apple SD Gothic Neo",
-               "Malgun Gothic", "맑은 고딕", "Nanum Gothic", "Noto Sans KR", "Noto Sans CJK KR",
-               arial, 돋움, Dotum, Tahoma, Geneva, sans-serif !important;
-  font-size: 18px;
-  line-height: 1.7;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Apple SD Gothic Neo",
+                 "Malgun Gothic", "맑은 고딕", "Nanum Gothic", "Noto Sans KR", "Noto Sans CJK KR",
+                 arial, 돋움, Dotum, Tahoma, Geneva, sans-serif !important;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-/* 기울임체 적용안되서 CSS로 적용 */
+/* ProseMirror 내부 텍스트 */
+.toastui-editor .ProseMirror {
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    /* margin-left: 1rem; */
+}
+
+/* 기울임체 */
 .markdown-body em,
 .markdown-body i {
     font-style: italic;
 }
 
-/* 이미지탭 누를시 FILES부분 색 지정 */
+/* 이미지탭 파일 선택 강조 */
 .toastui-editor-popup-add-image .toastui-editor-tabs .tab-item.active {
     color: #12b886;
     border-bottom: 2px solid #12b886;
 }
 
-/* 이미지, 링크탭 누를시 버튼 색 지정 */
+/* 이미지/링크 팝업 확인 버튼 색상 */
 .toastui-editor-defaultUI .toastui-editor-ok-button {
     min-width: 63px;
     height: 32px;
@@ -48,10 +67,7 @@
     outline-color: #12b886;
 }
 
-.editor-container {
-    position: relative;
-}
-
+/* 에디터 placeholder */
 .editor-placeholder {
     position: absolute;
     top: 61px;
@@ -62,33 +78,8 @@
     z-index: 5;
 }
 
-/* 에디터 입력창 폰트 크기 */
-.toastui-editor .toastui-editor-md-container .toastui-editor-contents {
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-}
-
-.ProseMirror {
-    Margin-left: 1rem;
-}
-
-/* ProseMirror 내부 입력 텍스트 */
-.toastui-editor .ProseMirror {
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-}
-  
-  /* 렌더링된 HTML (오른쪽) */
-.markdown-body {
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-}
-
-.toastui-editor-md-tab-container {
-    display: none;
-}
-
+/* 탭 영역 숨김 */
+.toastui-editor-md-tab-container,
 .toastui-editor-tabs {
     display: none;
 }
-  

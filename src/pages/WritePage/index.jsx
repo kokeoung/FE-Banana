@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 084769fc2c2fd7a350db3ea6b1d1523e25d453b1
 import React, { useState, useRef, useEffect } from 'react';
 
 
@@ -9,6 +12,7 @@ marked.setOptions({
   breaks: true
 });
 import '@toast-ui/editor/dist/toastui-editor.css';
+<<<<<<< HEAD
 
 
 // import 'github-markdown-css/github-markdown-light.css';
@@ -18,6 +22,8 @@ import { useNavigate } from 'react-router-dom';
 import { applyHeader, wrapWith } from './markdownUtils';
 
 
+=======
+>>>>>>> 084769fc2c2fd7a350db3ea6b1d1523e25d453b1
 import './WritePage.css';
 import './Markdown.css';
 

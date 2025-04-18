@@ -47,6 +47,9 @@
     transition: background-color 0.2s ease;
     box-sizing: border-box;
     font-size: 15px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
 }
 
 .filter-option:not(:last-child) {
