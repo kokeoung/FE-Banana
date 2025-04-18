@@ -13,8 +13,6 @@ export default function MyPage(){
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
   const [file, setFile] = useState(null);
-  const [err,setErr] = useState("");
-
   useEffect(() => {
       
     async function fetchUser(){
@@ -62,6 +60,7 @@ export default function MyPage(){
     setActive(prev => ({...prev,[id]:"active"}))
   }
   async function handleChangeUserData(){
+    const url = `http://localhost:8080/api/my/change/${userId}`;
     try {
       const formData = new FormData();
       formData.append("userId", userId);
@@ -92,11 +91,17 @@ export default function MyPage(){
       </div>
       <Modal isOpen={modalClose} onClose={()=>{setModalClose(false);handleChangeUserData();}}>
         <div className="my-setting">
-          <form >
-            프로필 수정
-            <input type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>           
-            <Input onChange={(e)=>{setNick(e.target.value)}} error={err} placeholder={"수정할 닉네임"}/>
-            <Input onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
+          <form className="my-form-container">
+            <div>
+              프로필 수정
+              <input type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
+            </div>   
+            <div>
+              <Input onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>
+            </div>     
+            <div>
+              <Input onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
+            </div>         
           </form>
         </div>
       </Modal>
