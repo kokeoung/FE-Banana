@@ -43,7 +43,7 @@
 .toastui-editor .ProseMirror {
     font-size: 18px !important;
     line-height: 1.7 !important;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
 }
 
 /* 기울임체 */
