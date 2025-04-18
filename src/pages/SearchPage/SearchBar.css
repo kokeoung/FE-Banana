@@ -1,7 +1,7 @@
 /* 1rem은 보통 16px, 즉 1.5rem이면 약 24px 정도 여백 */
 
 .main-content{
-    max-width: 768px;
+    /* max-width: 768px; */
     margin: 0 auto;
 }
 .search-wrap{
@@ -9,11 +9,14 @@
     min-height: 100vh;
 }
 .search-container{
-    margin-top: 3.5rem;
+    padding-top: 3.5rem;
     transition: margin 0.3s ease;
+    display: flex;
+    justify-content: center;
 }
 .search-bar{
-    width: 100%;
+    max-width: 768px;
+    width: 70%;
     padding: 0 1.5rem;
     justify-content: space-between;
     position: relative;
