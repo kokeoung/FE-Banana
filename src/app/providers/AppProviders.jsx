@@ -12,8 +12,7 @@ import TestPage from "../../pages/TestPage";
 import About from "../../features/ui/MyFrom/About";
 import Series from "../../features/ui/MyFrom/Series";
 import Posts from "../../features/ui/MyFrom/Posts";
-
-
+import { PageProvider } from "./PageContext";
 
 const router=createBrowserRouter([
   {
@@ -25,7 +24,7 @@ const router=createBrowserRouter([
         element:<HomePage />
       },
       {
-        path:"my",
+        path:"my/:userId",
         element:<MyPage />,
         children:[
           {
@@ -43,7 +42,7 @@ const router=createBrowserRouter([
         ]
       },
       {
-        path:"read",
+        path:"posts/:id",
         element:<ReadPage />
       },
       {
@@ -74,8 +73,10 @@ const router=createBrowserRouter([
 
 const AppProvider=({children})=>(
   <FormSubmitBlocker>
-    {children}
-    <RouterProvider  router={router} />
+    <PageProvider>
+      {children}
+      <RouterProvider  router={router} />
+    </PageProvider>
   </FormSubmitBlocker>
 )
 

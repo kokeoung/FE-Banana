@@ -87,5 +87,5 @@ export default function SearchPage() {
       </div>
       {isSearching && <SearchResults />}
     </div>
-  </>)
-}
+    </>);
+};

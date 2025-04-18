@@ -1,16 +1,23 @@
 .post-list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
-    gap: 24px;
-    max-width: 1780px;
+    grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
+    gap: 24px; /* 상하 32px, 좌우 24px */
+    /* max-width: 1650px; */
     margin: 0 auto;
-    padding: 40px;
     box-sizing: border-box;
     height: 100vh;
     align-items: start;
+    /* padding: clamp(0rem, 5vw, 0rem); */
 }
 
-.app-container {
+.content-wrapper {
     background-color: rgb(248, 249, 250);
+    padding-left: clamp(1rem, 4.5vw, 8rem);
+    padding-right: clamp(1rem, 4.5vw, 8rem);
 } 
+
+.filter-area {
+    padding: 2rem 0rem 4.5rem 0rem; 
+}
+
 
