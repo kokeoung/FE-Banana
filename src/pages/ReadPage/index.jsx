@@ -5,6 +5,7 @@ import './ReadPage.css';
 import { usePageContext } from '../../app/providers/PageContext';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import CommentArea from '../../shared/ui/Comment';
 
 /**
  * 날짜를 'YYYY년 M월 D일' 형식으로 변환하는 함수
@@ -222,16 +223,8 @@ export default function ReadPage() {
       {/* 5. 댓글 목록 */}
       <section className="comments">
         {post.comments.map((comment) => (
-          <div key={comment.id} className="comment">
-            <FaUserCircle className="comment-avatar" />
-            <div className="comment-content">
-              <div className="comment-header">
-                <span className="comment-author">{comment.author}</span>
-                <span className="comment-date">{formatDate(comment.createdAt)}</span>
-              </div>
-              <p>{comment.content}</p>
-            </div>
-          </div>
+    <CommentArea author={comment.author} createdAt={comment.createdAt} content={comment.content}/>
+          
         ))}
       </section>
     </main>

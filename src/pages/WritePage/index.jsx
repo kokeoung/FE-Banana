@@ -1,11 +1,29 @@
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 084769fc2c2fd7a350db3ea6b1d1523e25d453b1
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+
 import { Editor } from '@toast-ui/react-editor';
 import { marked } from 'marked';
 marked.setOptions({
   breaks: true
 });
 import '@toast-ui/editor/dist/toastui-editor.css';
+<<<<<<< HEAD
+
+
+// import 'github-markdown-css/github-markdown-light.css';
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { marked } from 'marked';
+import { applyHeader, wrapWith } from './markdownUtils';
+
+
+=======
+>>>>>>> 084769fc2c2fd7a350db3ea6b1d1523e25d453b1
 import './WritePage.css';
 import './Markdown.css';
 
