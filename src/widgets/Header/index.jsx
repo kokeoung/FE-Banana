@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaAngleDown } from "react-icons/fa";
 import { useState, useRef, useEffect } from 'react';
 import Button from '../../shared/ui/Button';
@@ -58,8 +58,25 @@ export default function Header(){
 
 
   return(<>
+
+
+
   <header className='header'>
-    <h1 className='header-titie'>해더</h1>
+
+  <p className='header-titie'>
+      {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
+      {pageInfo.isHome ?
+        (<Link to="/">Banana</Link>) : 
+        (
+        <>
+          <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
+          {/* 작성자가 있으면 @작성자명 표시 */}
+          {pageInfo.author && (
+            <span className="author-link">@{pageInfo.author}</span>
+          )}
+        </>
+      )}
+    </p>
     
     <section className='header-buttons'>
 
