@@ -29,13 +29,22 @@ export default function Header(){
     setIsDropdownOpen(prev => !prev);
   };
   
-  const handleOptionClick = (option) => {
-    setIsDropdownOpen(false);
-    if (option === '내 블로그') navigate('/my');
-    else if (option === '새 글 작성') navigate('/write');
-    else if (option === '임시 글') navigate('/my'); // 임시로 마이페이지로 설정 
-    else if (option === '로그아웃') alert("로그아웃 처리"); // 나중에 로직 연결
-  };
+  if (option === '내 블로그') {
+    if (user?.userId) {
+      navigate(`/my/${user.userId}`);
+    } else {
+      alert("로그인 정보가 없습니다.");
+    }
+  } else if (option === '새 글 작성') {
+    navigate('/write');
+  } else if (option === '임시 글') {
+    navigate('/my'); // 임시로 마이페이지로 설정
+  } else if (option === '로그아웃') {
+    localStorage.removeItem("user");
+    alert("로그아웃 되었습니다");
+    navigate("/");
+  }
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -88,4 +97,4 @@ export default function Header(){
       </section>
     </header>
   </>)
-}
+};
