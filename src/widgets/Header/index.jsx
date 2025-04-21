@@ -1,6 +1,7 @@
 import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
+
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -67,7 +68,7 @@ export default function Header(){
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-    
+
   return(<>
   <header className='header'>
     

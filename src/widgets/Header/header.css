@@ -69,6 +69,9 @@ Margin-left: 15px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+<<<<<<< HEAD
+
+=======
 }
 
 .search-button {
@@ -80,6 +83,7 @@ Margin-left: 15px;
   justify-content: center;
   align-items: center;
   font-size: 22px;
+>>>>>>> 084769fc2c2fd7a350db3ea6b1d1523e25d453b1
 }
 
 
