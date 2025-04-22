@@ -2,10 +2,12 @@ import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 
+
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
-import { useState, useRef, useEffect } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { FaAngleDown } from "react-icons/fa";
+import { useState, useRef, useEffect } from 'react';
 import Button from '../../shared/ui/Button';
 
 
@@ -37,26 +39,11 @@ export default function Header(){
   
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
-  
-    const user = JSON.parse(localStorage.getItem("user"));
-  
-    if (option === '내 블로그') {
-      if (user?.userId) {
-        navigate(`/my/${user.userId}`);
-      } else {
-        alert("로그인 정보가 없습니다.");
-      }
-    } else if (option === '새 글 작성') {
-      navigate('/write');
-    } else if (option === '임시 글') {
-      navigate('/my'); // 임시로 마이페이지로 설정
-    } else if (option === '로그아웃') {
-      localStorage.removeItem("user");
-      alert("로그아웃 되었습니다");
-      navigate("/");
-    }
+    if (option === '내 블로그') navigate('/my');
+    else if (option === '새 글 작성') navigate('/write');
+    else if (option === '임시 글') navigate('/my'); // 임시로 마이페이지로 설정 
+    else if (option === '로그아웃') alert("로그아웃 처리"); // 나중에 로직 연결
   };
-  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -69,10 +56,14 @@ export default function Header(){
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+
   return(<>
+
+
+
   <header className='header'>
-    
-    <p className='header-titie'>
+
+  <p className='header-titie'>
       {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
       {pageInfo.isHome ?
         (<Link to="/">Banana</Link>) : 
