@@ -1,10 +1,10 @@
 import './SearchPostCard.css';
 
 
-export default function SearchPostCard({ title, content, imageUrl, createdAt, likes, comments, children }) {
+export default function SearchPostCard({ postTitle, postContent, thumbnail, createDateTime, likeCount, comments, children }) {
 
   const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
+    const date = new Date(dateStr+"T00:00:00");
     return date.toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
@@ -19,20 +19,20 @@ export default function SearchPostCard({ title, content, imageUrl, createdAt, li
         <div className="search-post-profile">{children}</div>
       </div>
       <img
-        src={imageUrl}
+        src={thumbnail}
         alt="썸네일"
         className="search-post-thumbnail"
         onError={(e) => (e.target.style.display = 'none')} // 이미지 오류 처리
       />
 
       <div className="search-post-content">
-        <h3 className="search-post-title">{title}</h3>
+        <h3 className="search-post-title">{postTitle}</h3>
 
         {/* <p className="search-post-date">{createdAt}</p> */}
         {/* <div className="search-post-footer"> */}
-        <p className="search-post-excerpt">{content}</p>
+        <p className="search-post-excerpt">{postContent}</p>
         <div className="search-post-meta">
-          {formatDate(createdAt)} · {comments}개의 댓글 · 🖤 {likes}
+          {formatDate(createDateTime)} · {comments}개의 댓글 · 🖤 {likeCount}
         </div>
       </div>
     </div>
