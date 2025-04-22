@@ -5,10 +5,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchResults from "../SearchResults";
 
 export default function SearchPage() {
-  const [isFocused, SetIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); //검색어 상태
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [searchParams] = useSearchParams();
+  const [posts, setPosts]=useState([]);
+  const [loading, setLoading]=useState(true);
   const navigate = useNavigate();
   const inputRef=useRef(null);
 
@@ -33,6 +35,36 @@ export default function SearchPage() {
 
     return () => clearTimeout(delay); //cleanup : 타이머 중복 제거
   }, [searchTerm, navigate, searchParams]);
+
+  //fetch로 백앤드 API 호출
+  useEffect(()=>{
+    const fetchApi=async()=>{
+      try{
+      setLoading(true);
+      console.log("연결에 성공했나용?");
+      
+      const response = await fetch('http://localhost:8080/api/search',{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({}),
+      });
+      if(!response.ok){
+        throw new Error (`서버 응답 오류: ${response.status}`);
+      }
+      const data=await response.json();
+      setPosts(data);
+      console.log('게시글 데이터 불러오기 성공~:',data)
+      } catch (error){
+        console.error('게시글 불러오기 실패..~:', error)
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchApi();
+  },[]);
+
 
   //화면 크기 변경 감지
   useEffect(() => {
@@ -76,8 +108,8 @@ export default function SearchPage() {
             className="search-input"
             type="text"
             placeholder="검색어를 입력하세요"
-            onFocus={() => SetIsFocused(true)} //클릭하면 true
-            onBlur={() => SetIsFocused(false)} //포커스 벗어나면 false
+            onFocus={() => setIsFocused(true)} //클릭하면 true
+            onBlur={() => setIsFocused(false)} //포커스 벗어나면 false
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             ref={inputRef}
