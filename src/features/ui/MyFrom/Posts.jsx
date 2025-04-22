@@ -3,7 +3,7 @@ import "./MyFrom.css"
 import { useEffect, useState } from "react"
 import MyPostCard from "../../../shared/ui/MyPostCard"
 import none from "../../../app/assets/notcontent2.svg"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 const dummy = [
   {
@@ -30,6 +30,150 @@ const dummy = [
     content:"같은 내용이지만 다른 포스트 카드",
     like: 27,
   },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
+  {
+    id: 3,
+    title: '테스트3',
+    img: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
+    createdAt: '2025년 04월 09일',
+    content:"같은 내용이지만 다른 포스트 카드",
+    like: 27,
+  },
 ]
 
 
@@ -38,11 +182,12 @@ export default function Posts(){
   const { userId } = useParams();
   const [color,setColor] = useState("")
   const [search,setSearch] = useState("")
+  const [visibleCount,setVisibleCount] = useState(10)
 
   useEffect(()=>{
     async function fetchUserPost(){
       try {
-        const url = `http://localhost:8080/api/my/post/${userId}`;
+        const url = `http://localhost:8080/api/my/post/${userId}&limit=10`;
         const sendData = {
             userId: userId,
         }
@@ -78,16 +223,21 @@ export default function Posts(){
         <img src={none} alt="" />
       </div>):
       (<div className="postspage-main">
-      {filteredData.map(post=>(
-        <MyPostCard key={post.id} 
-          imageUrl={post.img} 
-          title={post.title} 
-          content={post.content} 
-          createdAt={post.createdAt} 
-          liked={post.like} />
+      {filteredData.slice(0, visibleCount).map(post=>(
+        <Link to={`/posts/${post.id}`}>
+          <MyPostCard key={post.id} 
+            imageUrl={post.img} 
+            title={post.title} 
+            content={post.content} 
+            createdAt={post.createdAt} 
+            liked={post.like} />
+        </Link>      
       ))}
-      </div>)
-      }
+      </div>)}
+      {filteredData.length > visibleCount && (
+      <button className="postspage-button" onClick={() => setVisibleCount(prev => prev + 10)}>
+        더보기
+      </button>)}
     </div>
   </>)
 }
