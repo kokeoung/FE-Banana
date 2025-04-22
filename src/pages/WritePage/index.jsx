@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 
 
@@ -10,13 +9,9 @@ marked.setOptions({
 });
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-
 // import 'github-markdown-css/github-markdown-light.css';
-import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { marked } from 'marked';
-import { applyHeader, wrapWith } from './markdownUtils';
-
 
 import './WritePage.css';
 import './Markdown.css';

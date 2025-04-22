@@ -1,40 +1,100 @@
 import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
 
-import Button from '../../shared/ui/Button';
+
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
+
 import { Link, useNavigate } from 'react-router-dom';
+import { FaAngleDown } from "react-icons/fa";
+import { useState, useRef, useEffect } from 'react';
+import Button from '../../shared/ui/Button';
 
 
+const filterOptions = ['내 블로그', '새 글 작성', '임시 글', '로그아웃'];
+
+export default function Header() {
+
+  // 로그인 사라지게 하는 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  
+
+  
+
+  useEffect(() => {
+    const user = localStorage.getItem('id');
+    setIsLoggedIn(true);
+  }, []);
 
 
-
-export default function Header(){
-  // Context에서 현재 페이지 정보 가져오기
-
-
-    const { pageInfo } = usePageContext();
-
-    const navigate = useNavigate();
-
-    const handleWriteClick = () => {
-      navigate('/write');
-    };
-
-    const handleSearchClick = () => {
-      navigate('/search');
-    };
-
-    const handleLoginClick = () => {
-      navigate('/auth')
-    };
+    const handleLogin = () => {
+      // 여기서 직접 로그인 처리
+      localStorage.setItem('id', JSON.stringify({ name: 'nick' }));
+      setIsLoggedIn(true); };
     
+    
+
+
+
+  const { pageInfo } = usePageContext();
+
+  const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleWriteClick = () => {
+    navigate('/write');
+  };
+
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
+
+  const handleLoginClick = () => {
+    navigate('/auth')
+    
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(prev => !prev);
+  };
+
+  
+
+  const handleOptionClick = (option) => {
+    setIsDropdownOpen(false);
+    if (option === '내 블로그') navigate('/my');
+    else if (option === '새 글 작성') navigate('/write');
+    else if (option === '임시 글') navigate('/my'); // 임시로 마이페이지로 설정 
+    else if (option === '로그아웃') {
+      alert("로그아웃 처리");
+      localStorage.removeItem('id');      // 저장된 로그인 정보 삭제
+      setIsLoggedIn(false);                 // 상태 업데이트해서 버튼 바꾸기
+      navigate('/');       
+    } // 나중에 로직 연결
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+
   return(<>
+
+
+
+
   <header className='header'>
-    
-    <p className='header-titie'>
+
+  <p className='header-titie'>
       {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
       {pageInfo.isHome ?
         (<Link to="/">Banana</Link>) : 
@@ -48,39 +108,50 @@ export default function Header(){
         </>
       )}
     </p>
-      
-    
-
     
     <section className='header-buttons'>
-    <div className='seach-icon'>
-      
-    <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
-      
-      
-    
-    </div>
-    <div className='pageadd-btn'>
+
+        <div className='headersearch-icon'>
+              <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
+          </div>
 
       
-    <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
+        {isLoggedIn? ( <>
+          <div className='pageadd-btn'>
+            <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
+          </div>
 
-    </div>
-    
-    <div className='login-btn'>
-      
-      
-    <Button size={"m"} value="로그인" onClick={handleLoginClick}/>
-    </div>
-    {/* 유저아이콘 버튼  클릭하면 유저 페이지 창 링크 이동 */}
-    <div className='user-icon' >
-      <FaUserCircle />
+          <div className='user-icon' >
+          <FaUserCircle />
+          </div>
 
-    </div>
-    <div className='header-user-filter'>
-    <FaAngleDown />
-    <button>버튼 </button>
-    </div>
+          <div className='header-filter' ref={dropdownRef}>
+                  <button className="dropdown-toggle" onClick={toggleDropdown}>
+                    <FaAngleDown />
+                  </button>
+
+                  {isDropdownOpen && (
+                    <div className="dropdown-menu">
+                      {filterOptions.map(option => (
+                        <div key={option} className="dropdown-item" onClick={() => handleOptionClick(option)}>
+                          {option}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+            </div>
+        </>   ) : (
+          <>
+          <div className='login-btn'> 
+            <Button size={"m"} value="로그인" onClick={() =>{handleLoginClick(); handleLogin(); }}/>
+          </div>
+          </>
+        
+        )}
+
+        
+        
+      
     </section>
     </header>
   </>)

@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from 'react';
 import PostCard from '../../shared/ui/PostCard';
 import UserProfile from '../../shared/ui/UserProfile';
 import FilterDropdown from '../../shared/ui/FilterDropdown';
@@ -78,16 +79,33 @@ const dummyPosts = [
   },
 ];
 
-export default function HomePage(){
+export default function HomePage() {
+  const dropdownRef = useRef(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
-    <>
     <div className="content-wrapper">
-      <div className="filter-area">  
-        <FilterDropdown onChange={(value) => console.log("선택된 필터:", value)} />
+      <div className="filter-area" ref={dropdownRef}>
+        <FilterDropdown
+          onChange={(value) => {
+            console.log("선택된 필터:", value);
+          }}
+        />
       </div>
+
       <div className="post-list-container">
-        {dummyPosts.map(post => (
+        {dummyPosts.map((post) => (
           <PostCard
             key={post.id}
             title={post.title}
@@ -98,12 +116,10 @@ export default function HomePage(){
             <UserProfile
               profileImage={post.profileImage}
               nickname={post.nickname}
-            >  
-            </UserProfile>
+            />
           </PostCard>
         ))}
       </div>
     </div>
-    </>
   );
 }
