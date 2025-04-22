@@ -2,15 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10px;
+  padding-top: clamp(1rem, 1vw, 1rem);
+  padding-left: clamp(1rem,calc((100vw - 1200px) / 2 + 80px), 15rem);
+  padding-right: clamp(1rem,calc((100vw - 1200px) / 2 + 80px), 15rem);
   background-color: rgb(248, 249, 250);
   color:black;
   max-width: 100%;
   box-sizing: border-box;
   margin-bottom: -8px;
-  padding-top: clamp(1rem, 1vw, 1rem);
-  padding-left: clamp(1rem, 4.5vw, 8rem);
-  padding-right: clamp(1rem, 4.5vw, 8rem);
   position: relative;
 }
 .header-titie{
@@ -28,8 +27,6 @@
 }
 .header-buttons{
   display: flex;
-  /* gap: 10px; */
-  /* overflow: hidden; */
 }
 
 .header-filter {
@@ -69,8 +66,6 @@ Margin-left: 15px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
-
 }
 
 .search-button {
@@ -82,9 +77,7 @@ Margin-left: 15px;
   justify-content: center;
   align-items: center;
   font-size: 22px;
-
 }
-
 
 .user-icon{
   font-size: 36px;

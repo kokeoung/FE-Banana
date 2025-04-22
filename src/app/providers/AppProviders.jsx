@@ -42,7 +42,7 @@ const router=createBrowserRouter([
         ]
       },
       {
-        path:"posts/:id",
+        path:"posts/:postId",
         element:<ReadPage />
       },
       {

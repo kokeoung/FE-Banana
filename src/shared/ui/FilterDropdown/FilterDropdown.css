@@ -1,9 +1,8 @@
 .filter-area {
     max-width: 1780px;
     margin: 0 auto;
-    padding: 40px;
     box-sizing: border-box;
-    margin-bottom: -27px;
+    padding: 2em 0 2em 2em;
   }
 
 .filter-dropdown {
