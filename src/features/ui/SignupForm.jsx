@@ -19,9 +19,6 @@ export default function SignupForm() {
       [name]:value
     }))
     validate(name,value);
-    
-    if(name==="id"){checkUserId(value);}
-    
   }
   function validate(name,value){
     if(value == ""){
@@ -74,15 +71,19 @@ export default function SignupForm() {
       body: JSON.stringify({userId:id})
     });
     const exists = await response.json();
-
     if(exists) {
       setError(prev => ({...prev,
         id:"이미 존재하는 아이디 입니다"
       }));
-      console.log("이미 존재하는 아이디 입니다")
+      return true;
     }
+    return false;
   }
   async function signupRequst(){
+    const idCheck = checkUserId(check.id);
+    if(!idCheck){console.log("아이디 중복뎀"); return;}
+    
+
     const url = `http://localhost:8080/api/auth`;
     const sendData = {
       userId: check.id,

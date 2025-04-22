@@ -93,8 +93,10 @@ export default function MyPage(){
         <div className="my-setting">
           <form className="my-form-container">
             <div>
-              프로필 수정
-              <input type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
+              <label for="myfile-upload" className="my-form-label">
+              프로필 이미지 수정
+              </label>
+              <input style={{"display":"none"}} id="myfile-upload" type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
             </div>   
             <div>
               <Input onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>
