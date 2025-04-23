@@ -5,6 +5,7 @@
 }
 .mypost-container > .mypost-img > img{
   width: 128px;
+  height: 128px;
   margin-right: 10px;
   border-radius: 50%;
 }

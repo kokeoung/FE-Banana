@@ -3,7 +3,7 @@ import "./MyPage.css"
 import MyUserProfile from "../../shared/ui/MyUserProfile";
 import { useEffect, useState } from "react";
 import Modal from "../../shared/ui/Modal";
-import Input from "../../shared/ui/Input"
+import Input from "../../shared/ui/Input";
 
 export default function MyPage(){
   const { userId } = useParams();
@@ -30,30 +30,16 @@ export default function MyPage(){
         const response = await fetch(url, init);
         const data = await response.json();
         setUser(data);
+        console.log(data);
       } catch (err) {
         // setError(err);
       } finally {
         // setIsLoading(false);
       }
-      };
+    };
       fetchUser();
-  
-      // 헤더 정보 업데이트
-      // setPageInfo({
-      //   title: 'B',
-      //   author: post.author.username,
-      //   isHome: false
-      // });
       
-      // 컴포넌트 언마운트 시 헤더 정보 초기화
-      // return () => {
-      //   setPageInfo({
-      //     title: 'Banana',
-      //     author: null,
-      //     isHome: true
-      //   });
-    // };
-  }, []);
+  }, [userId]);
   function handleClick(e){
     const {id} = e.currentTarget;
     setActive({myli1:"",myli2:"",myli3:""})
@@ -74,10 +60,9 @@ export default function MyPage(){
         body: formData, // Content-Type 자동 설정됨 
       });
       const data = await response.json();
-      
     } catch(err) {
-
     }
+    window.location.reload();
   }
 
   return(<>
