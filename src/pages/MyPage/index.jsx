@@ -3,7 +3,8 @@ import "./MyPage.css"
 import MyUserProfile from "../../shared/ui/MyUserProfile";
 import { useEffect, useState } from "react";
 import Modal from "../../shared/ui/Modal";
-import Input from "../../shared/ui/Input";
+import Input from "../../shared/ui/Input"
+import { usePageContext } from "../../app/providers/PageContext";
 
 export default function MyPage(){
   const { userId } = useParams();
@@ -13,6 +14,26 @@ export default function MyPage(){
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
   const [file, setFile] = useState(null);
+
+  const { setPageInfo } = usePageContext();
+
+  useEffect(() => { 
+    setPageInfo({
+      title: 'B',
+      author: userId,
+      isHome: false
+    });
+    
+  
+    return () => {
+      setPageInfo({
+      title: 'Banana',
+      author: null,
+      isHome: true
+      });
+    };
+  }, [userId ,setPageInfo]);
+
   useEffect(() => {
       
     async function fetchUser(){
