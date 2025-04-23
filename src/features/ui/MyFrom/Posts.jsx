@@ -29,6 +29,7 @@ export default function Posts(){
         const response = await fetch(url, init);
         const data = await response.json();
         setPostData(data);
+        console.log(data);
       } catch (err) {
         // setError(err);
       }
@@ -49,7 +50,7 @@ export default function Posts(){
             onFocus={() => setColor("postspage-focus")} onBlur={() => setColor("")} onChange={e => setSearch(e.target.value)}/>
         </div>
       </div>
-      {!postData?
+      {(postData.length === 0)?
       (<div className="postspage-worng">
         <img src={none} alt="" />
       </div>):
@@ -61,7 +62,7 @@ export default function Posts(){
             imageUrl={post.thumbnail} 
             title={post.postTitle} 
             content={post.postContent} 
-            createdAt={post.updateDateTime} 
+            createdAt={post.createDateTime} 
             liked={post.likeCount} />
         </Link>      
       ))}

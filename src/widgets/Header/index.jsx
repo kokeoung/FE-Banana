@@ -17,14 +17,13 @@ export default function Header() {
 
   // 로그인 사라지게 하는 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  
-
-  
+  const user = localStorage.getItem('user');
+  const userData = JSON.parse(user);
 
   useEffect(() => {
-    const user = localStorage.getItem('id');
-    setIsLoggedIn(true);
+    
+    console.log(user)
+    setIsLoggedIn(user);
   }, []);
 
 
@@ -64,12 +63,12 @@ export default function Header() {
 
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
-    if (option === '내 블로그') navigate('/my');
+    if (option === '내 블로그') navigate(`/my/${userData.userId}`);
     else if (option === '새 글 작성') navigate('/write');
-    else if (option === '임시 글') navigate('/my'); // 임시로 마이페이지로 설정 
+    else if (option === '임시 글'); // 임시로 마이페이지로 설정 
     else if (option === '로그아웃') {
       alert("로그아웃 처리");
-      localStorage.removeItem('id');      // 저장된 로그인 정보 삭제
+      localStorage.removeItem('user');      // 저장된 로그인 정보 삭제
       setIsLoggedIn(false);                 // 상태 업데이트해서 버튼 바꾸기
       navigate('/');       
     } // 나중에 로직 연결
