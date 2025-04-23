@@ -39,7 +39,7 @@ export default function SearchPage() {
   //fetch로 백앤드 API 호출
   useEffect(()=>{
     let isMounted=true;
-    
+
     const fetchSearchResults=async()=>{
       if(!searchTerm) return;
 
@@ -97,7 +97,6 @@ export default function SearchPage() {
   const handleWrapperClick=()=>{
     inputRef.current?.focus();
   }
-
 
   return (<>
     <div className="search-wrap">
