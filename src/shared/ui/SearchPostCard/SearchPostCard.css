@@ -2,6 +2,13 @@
   padding-top: 0;
   line-height: 1.5;
 }
+.search-post-card > .search-post-img{
+  width: 720px;
+  height: 500px;
+}
+.search-post-card > .search-post-img > img {
+  object-fit:cover;
+}
 .search-post-user-info{
   display: flex;
   align-items: center;
