@@ -25,7 +25,7 @@ export default function ReadPage() {
         setPost(data);
         setPageInfo({
           title: 'B',
-          author: data.user,
+          author: data.userNick,
           isHome: false,
         });
       } catch (err) {
