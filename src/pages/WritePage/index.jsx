@@ -20,8 +20,11 @@ export default function WritePage() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [thumbnail,setThumbnail] = useState('');
   const Navigate = useNavigate();
   const editorRef = useRef();
+  const user = JSON.parse(localStorage.getItem("user"));
+ 
 
   // 나가기 버튼
   const handleExit = () => {
@@ -38,10 +41,37 @@ export default function WritePage() {
     }
   };
 
+  const firstImageFind = (markdown) => {
+    const regex = /!\[.*?\]\((.*?)\)/;
+    const match = markdown.match(regex);
+    return match ? match[1] : null;
+  }
+
   const handleChange = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
+    const thumbnail = firstImageFind(editorContent);
     setContent(editorContent);
+    setThumbnail(thumbnail);
   };
+
+   const handleWriteClicked = async() => {
+
+    const sendData = {
+      user: user.id,
+      postTitle: title,
+      postContent: content,
+      thumbnail: thumbnail
+    }
+    console.log(sendData)
+    const url = `http://localhost:8080/api/write`;
+    const init = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(sendData)
+    }
+    const response = await fetch(url, init)
+    const data = await response.json();
+  }
 
   useEffect(() => {
     // 마운트 후 한 번 비워줌
@@ -64,7 +94,7 @@ export default function WritePage() {
         <div className="editor-title-underline" />
 
         <div className="editor-container">
-          <Editor 
+          <Editor
             placeholder="당신의 이야기를 적어보세요!!"
             height="720px"
             useCommandShortcut={true}
@@ -86,7 +116,7 @@ export default function WritePage() {
           <span className="editor-exit" onClick={handleExit}>↩  나가기</span>
           <div className="editor-bottons">
             <button className="btn-save">임시저장</button>
-            <button className="btn-submit">작성완료</button>                  
+            <button className="btn-submit" onClick={handleWriteClicked}>작성완료</button>                  
           </div>
         </div>
       </div>

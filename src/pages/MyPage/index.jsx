@@ -60,7 +60,7 @@ export default function MyPage(){
     setActive(prev => ({...prev,[id]:"active"}))
   }
   async function handleChangeUserData(){
-    const url = `http://localhost:8080/api/my/change/${userId}`;
+    const url = `http://localhost:8080/api/my/change`;
     try {
       const formData = new FormData();
       formData.append("userId", userId);
@@ -68,11 +68,12 @@ export default function MyPage(){
       formData.append("userAbout", about);
       formData.append("userProfile", file); // File 객체
 
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData, // Content-Type 자동 설정됨 
-    });
-    const data = await response.json();
+      console.log(formData);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData, // Content-Type 자동 설정됨 
+      });
+      const data = await response.json();
       
     } catch(err) {
 
@@ -96,7 +97,7 @@ export default function MyPage(){
               <label for="myfile-upload" className="my-form-label">
               프로필 이미지 수정
               </label>
-              <input style={{"display":"none"}} id="myfile-upload" type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
+              <input style={{"display":"none"}} id="myfile-upload" type="file" accept="image/*" onChange={(e)=>{setFile(e.target.files[0])}}/>
             </div>   
             <div>
               <Input onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>

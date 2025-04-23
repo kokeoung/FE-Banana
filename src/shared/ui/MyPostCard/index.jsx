@@ -2,7 +2,10 @@ import { Slice } from "lucide-react"
 import "./MyPostCard.css"
 
 export default function MyPostCard({imageUrl,title,content,createdAt,liked}){
-  const previewText = (content.length > 150)?content.slice(0, 150) + "...":content;
+
+  const cleanedText = content.replace(/!\[.*?\]\(data:image\/.*?\)/g, '');
+  const previewText = (cleanedText.length > 150)?cleanedText.slice(0, 150) + "...":cleanedText;
+  const time = createdAt.split('T')[0];
   return(<>
     <div className="mypostcard-container">
       <div className="mypostcard-header">
@@ -13,7 +16,7 @@ export default function MyPostCard({imageUrl,title,content,createdAt,liked}){
         <div className="mypostcard-content">{previewText}</div>
       </div>
       <div className="mypostcard-footer">
-        <div className="mypostcard-date">{createdAt}</div>
+        <div className="mypostcard-date">{time}</div>
         <span>&nbsp;·&nbsp;</span>
         <div className="mypostcard-liked">
           <div>❤</div>
