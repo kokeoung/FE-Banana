@@ -13,6 +13,7 @@ export default function MyPage(){
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
   const [file, setFile] = useState(null);
+  const { setPageInfo } = useState();
   useEffect(() => {
       
     async function fetchUser(){
@@ -38,21 +39,21 @@ export default function MyPage(){
       };
       fetchUser();
   
-      // 헤더 정보 업데이트
-      // setPageInfo({
-      //   title: 'B',
-      //   author: post.author.username,
-      //   isHome: false
-      // });
+      //헤더 정보 업데이트
+      setPageInfo({
+        title: 'B',
+        author: post.author.id,
+        isHome: false
+      });
       
-      // 컴포넌트 언마운트 시 헤더 정보 초기화
-      // return () => {
-      //   setPageInfo({
-      //     title: 'Banana',
-      //     author: null,
-      //     isHome: true
-      //   });
-    // };
+       //컴포넌트 언마운트 시 헤더 정보 초기화
+      return () => {
+        setPageInfo({
+          title: 'Banana',
+          author: null,
+          isHome: true
+        });
+    };
   }, []);
   function handleClick(e){
     const {id} = e.currentTarget;
