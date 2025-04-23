@@ -2,7 +2,7 @@ import './PostCard.css';
 
 
 export default function PostCard({title,imageUrl,createdAt,likes,children}){
-
+  
   return(<>
     <div className="postcard-card">
       <div className="postcard-header">

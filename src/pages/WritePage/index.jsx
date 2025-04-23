@@ -55,6 +55,16 @@ export default function WritePage() {
   };
 
    const handleWriteClicked = async() => {
+    const isTitleEmpty = title.trim() === '';
+    const isContentEmpty = content.trim() === '';
+    if(isTitleEmpty){
+      alert("제목을 입력해 주세요");
+      return;
+    }
+    if(isContentEmpty){
+      alert("내용을 입력해 주세요");
+      return;
+    }
 
     const sendData = {
       user: user.id,
@@ -69,8 +79,33 @@ export default function WritePage() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(sendData)
     }
-    const response = await fetch(url, init)
+    const response = await fetch(url, init);
+    console.log(response);
     const data = await response.json();
+    
+    Navigate(`/posts/${data.id}`);
+  }
+  const handleImageUpload = async (blob, callback) => {
+    // 1. S3에 이미지 업로드
+    const imageUrl = await uploadToS3(blob);
+
+    // 2. Toast UI에 이미지 삽입
+    callback(imageUrl, '이미지 설명');
+  };
+
+  const uploadToS3 = async (file) => {
+    const formData = new FormData();
+    formData.append('postFile', file);
+    const url = `http://localhost:8080/api/write/url`;
+    const init = {
+      method: "POST",
+      body: formData,
+    }
+    const response = await fetch(url,init);
+    console.log("status:", response.status);
+    const data = await response.text();
+    console.log(data);
+    return data;
   }
 
   useEffect(() => {
@@ -95,6 +130,9 @@ export default function WritePage() {
 
         <div className="editor-container">
           <Editor
+            hooks={{
+              addImageBlobHook: handleImageUpload,
+            }}
             placeholder="당신의 이야기를 적어보세요!!"
             height="720px"
             useCommandShortcut={true}
@@ -126,7 +164,7 @@ export default function WritePage() {
         <h1>{title}</h1>
         <div
           className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: marked(content) }}
+          dangerouslySetInnerHTML={{ __html: marked(content)}}
         />
       </div>
     </div>        
