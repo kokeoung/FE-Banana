@@ -9,14 +9,15 @@ import { Link, useParams } from "react-router-dom"
 export default function Posts(){
 
   const { userId } = useParams();
-  const [color,setColor] = useState("")
-  const [search,setSearch] = useState("")
-  const [visibleCount,setVisibleCount] = useState(10)
+  const [color,setColor] = useState("");
+  const [search,setSearch] = useState("");
+  const [visibleCount,setVisibleCount] = useState(10);
+  const [postData,setPostData] = useState([]);
 
   useEffect(()=>{
     async function fetchUserPost(){
       try {
-        const url = `http://localhost:8080/api/my/post/${userId}&limit=10`;
+        const url = `http://localhost:8080/api/my/post/${userId}`;
         const sendData = {
             userId: userId,
         }
@@ -27,7 +28,8 @@ export default function Posts(){
         }
         const response = await fetch(url, init);
         const data = await response.json();
-
+        setPostData(data);
+        console.log(data);
       } catch (err) {
         // setError(err);
       }
@@ -35,9 +37,10 @@ export default function Posts(){
       fetchUserPost();
   },[]);
 
-  const filteredData = dummy.filter(post =>
-    post.title.toLowerCase().includes(search.toLowerCase())
+  const filteredData = postData.filter(post =>
+    post.postTitle.toLowerCase().includes(search.toLowerCase())
   );
+
   return(<>
     <div className="postspage-container">
       <div className="postspage-header">
@@ -47,19 +50,20 @@ export default function Posts(){
             onFocus={() => setColor("postspage-focus")} onBlur={() => setColor("")} onChange={e => setSearch(e.target.value)}/>
         </div>
       </div>
-      {!dummy?
+      {(postData.length === 0)?
       (<div className="postspage-worng">
         <img src={none} alt="" />
       </div>):
       (<div className="postspage-main">
-      {filteredData.slice(0, visibleCount).map(post=>(
-        <Link to={`/posts/${post.id}`}>
-          <MyPostCard key={post.id} 
-            imageUrl={post.img} 
-            title={post.title} 
-            content={post.content} 
-            createdAt={post.createdAt} 
-            liked={post.like} />
+      {filteredData.slice(0, visibleCount).map((post,i)=>(
+        <Link key={i}  
+              to={`/posts/${post.postId}`}>
+          <MyPostCard
+            imageUrl={post.thumbnail} 
+            title={post.postTitle} 
+            content={post.postContent} 
+            createdAt={post.createDateTime} 
+            liked={post.likeCount} />
         </Link>      
       ))}
       </div>)}

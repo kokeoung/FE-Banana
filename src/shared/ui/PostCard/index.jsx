@@ -1,5 +1,4 @@
 import './PostCard.css';
-import { Link } from 'react-router-dom';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -11,8 +10,8 @@ const formatDate = (dateString) => {
 };
 
 export default function PostCard({postId, postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
+
   return(<>
-  <Link href={`/posts/${postId}`} className="postcard-link"></Link>
     <div className="postcard-card">
       <div className="postcard-header">
         <img src={thumbnail} className="postcard-img"/>
@@ -26,7 +25,7 @@ export default function PostCard({postId, postTitle,postContent,thumbnail,create
         <div>{children}</div>
         <div className="postcard-like">
           <div>🖤</div>
-          <div className="postcard-likes">{likeCount}</div>
+          <div className="postcard-likes">{likes}</div>
 
         </div>
       </div>

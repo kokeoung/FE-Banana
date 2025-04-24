@@ -20,8 +20,11 @@ export default function WritePage() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [thumbnail,setThumbnail] = useState('');
   const Navigate = useNavigate();
   const editorRef = useRef();
+  const user = JSON.parse(localStorage.getItem("user"));
+ 
 
   // 나가기 버튼
   const handleExit = () => {
@@ -38,10 +41,72 @@ export default function WritePage() {
     }
   };
 
+  const firstImageFind = (markdown) => {
+    const regex = /!\[.*?\]\((.*?)\)/;
+    const match = markdown.match(regex);
+    return match ? match[1] : null;
+  }
+
   const handleChange = () => {
     const editorContent = editorRef.current.getInstance().getMarkdown();
+    const thumbnail = firstImageFind(editorContent);
     setContent(editorContent);
+    setThumbnail(thumbnail);
   };
+
+   const handleWriteClicked = async() => {
+    const isTitleEmpty = title.trim() === '';
+    const isContentEmpty = content.trim() === '';
+    if(isTitleEmpty){
+      alert("제목을 입력해 주세요");
+      return;
+    }
+    if(isContentEmpty){
+      alert("내용을 입력해 주세요");
+      return;
+    }
+
+    const sendData = {
+      user: user.id,
+      postTitle: title,
+      postContent: content,
+      thumbnail: thumbnail
+    }
+    console.log(sendData)
+    const url = `http://localhost:8080/api/write`;
+    const init = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(sendData)
+    }
+    const response = await fetch(url, init);
+    console.log(response);
+    const data = await response.json();
+    
+    Navigate(`/posts/${data.id}`);
+  }
+  const handleImageUpload = async (blob, callback) => {
+    // 1. S3에 이미지 업로드
+    const imageUrl = await uploadToS3(blob);
+
+    // 2. Toast UI에 이미지 삽입
+    callback(imageUrl, '이미지 설명');
+  };
+
+  const uploadToS3 = async (file) => {
+    const formData = new FormData();
+    formData.append('postFile', file);
+    const url = `http://localhost:8080/api/write/url`;
+    const init = {
+      method: "POST",
+      body: formData,
+    }
+    const response = await fetch(url,init);
+    console.log("status:", response.status);
+    const data = await response.text();
+    console.log(data);
+    return data;
+  }
 
   useEffect(() => {
     // 마운트 후 한 번 비워줌
@@ -64,7 +129,10 @@ export default function WritePage() {
         <div className="editor-title-underline" />
 
         <div className="editor-container">
-          <Editor 
+          <Editor
+            hooks={{
+              addImageBlobHook: handleImageUpload,
+            }}
             placeholder="당신의 이야기를 적어보세요!!"
             height="720px"
             useCommandShortcut={true}
@@ -86,7 +154,7 @@ export default function WritePage() {
           <span className="editor-exit" onClick={handleExit}>↩  나가기</span>
           <div className="editor-bottons">
             <button className="btn-save">임시저장</button>
-            <button className="btn-submit">작성완료</button>                  
+            <button className="btn-submit" onClick={handleWriteClicked}>작성완료</button>                  
           </div>
         </div>
       </div>
@@ -96,7 +164,7 @@ export default function WritePage() {
         <h1>{title}</h1>
         <div
           className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: marked(content) }}
+          dangerouslySetInnerHTML={{ __html: marked(content)}}
         />
       </div>
     </div>        

@@ -4,6 +4,7 @@ import MyUserProfile from "../../shared/ui/MyUserProfile";
 import { useEffect, useState } from "react";
 import Modal from "../../shared/ui/Modal";
 import Input from "../../shared/ui/Input"
+import { usePageContext } from "../../app/providers/PageContext";
 
 export default function MyPage(){
   const { userId } = useParams();
@@ -19,29 +20,24 @@ export default function MyPage(){
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
   const [file, setFile] = useState(null);
-
+  const [fileName,setFileName] = useState("👈 이미지 선택");
   const { setPageInfo } = usePageContext();
 
-  useEffect (() => {
-    localStorage.setItem("item", 10);
-  })
-  
-  // useEffect(() => { 
-  //   setPageInfo({
-  //     title: 'B',
-  //     author: userId,
-  //     isHome: false
-  //   });
+  useEffect(() => { 
+    setPageInfo({
+      title: 'B',
+      author: userId,
+      isHome: false
+    });
     
-  
-  //   return () => {
-  //     setPageInfo({
-  //     title: 'Banana',
-  //     author: null,
-  //     isHome: true
-  //     });
-  //   };
-  // }, [userId ,setPageInfo]);
+    return () => {
+      setPageInfo({
+      title: 'Banana',
+      author: null,
+      isHome: true
+      });
+    };
+  }, [userId ,setPageInfo]);
 
   useEffect(() => {
       
@@ -60,52 +56,45 @@ export default function MyPage(){
         const response = await fetch(url, init);
         const data = await response.json();
         setUser(data);
+        console.log(data);
       } catch (err) {
         // setError(err);
       } finally {
         // setIsLoading(false);
       }
-      };
+    };
       fetchUser();
-  
-      // 헤더 정보 업데이트
-      // setPageInfo({
-      //   title: 'B',
-      //   author: post.author.username,
-      //   isHome: false
-      // });
       
-      // 컴포넌트 언마운트 시 헤더 정보 초기화
-      // return () => {
-      //   setPageInfo({
-      //     title: 'Banana',
-      //     author: null,
-      //     isHome: true
-      //   });
-    // };
-  }, []);
+  }, [userId]);
   function handleClick(e){
     const {id} = e.currentTarget;
     setActive({myli1:"",myli2:"",myli3:""})
     setActive(prev => ({...prev,[id]:"active"}))
   }
+  function handleLabelChange(e){  
+    setFile(e.target.files[0])
+    setFileName(e.currentTarget.files[0].name)
+  }
   async function handleChangeUserData(){
-    const url = `http://localhost:8080/api/my/change/${userId}`;
+    const url = `http://localhost:8080/api/my/change`;
+    const nickCheck = nick?nick:(user.userNick);
     try {
       const formData = new FormData();
       formData.append("userId", userId);
-      formData.append("userNick", nick);
+      formData.append("userNick", nickCheck);
       formData.append("userAbout", about);
       formData.append("userProfile", file); // File 객체
 
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData, // Content-Type 자동 설정됨 
-    });
-    const data = await response.json();
-      
+      console.log(formData);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData, // Content-Type 자동 설정됨 
+      });
+      const data = await response.json();
     } catch(err) {
     }
+    window.location.reload();
+  }
 
   return(<>
     <div className="my-container">
@@ -124,23 +113,26 @@ export default function MyPage(){
             </div>
           )}
         <div className="my-setting-btn">
-          <button onClick={()=>{setModalClose(true)}}>정보 수정</button>
+          <button onClick={()=>{setModalClose(true);setAbout(user.userAbout);setNick(user.userNick)}}>정보 수정</button>
         </div>
       </div>
       <Modal isOpen={modalClose} onClose={()=>{setModalClose(false);handleChangeUserData();}}>
         <div className="my-setting">
           <form className="my-form-container">
             <div>
-              <label for="myfile-upload" className="my-form-label">
-              프로필 이미지 수정
+              <label htmlFor="myfile-upload" className="my-form-label">
+              +
               </label>
-              <input style={{"display":"none"}} id="myfile-upload" type="file" accept="image/*" onChange={(e)=>{setFile(e.target.value)}}/>
+              <span>
+                {fileName}
+              </span>
+              <input style={{"display":"none"}} id="myfile-upload" type="file" accept="image/*" onChange={handleLabelChange}/>
             </div>   
             <div>
-              <Input onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>
+              <Input value={nick} onChange={(e)=>{setNick(e.target.value)}} placeholder={"수정할 닉네임"}/>
             </div>     
             <div>
-              <Input onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
+              <Input value={about} onChange={(e)=>{setAbout(e.target.value)}} placeholder={"수정할 소개"}/>
             </div>         
           </form>
         </div>
