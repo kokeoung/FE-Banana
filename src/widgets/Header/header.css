@@ -17,6 +17,10 @@
   height: 32px;
 
 }
+.header-titie {
+  font-weight: bold;
+  font-size: 1.5em;
+}
 .header-titie-author{
   display: inline-flex;
   justify-content: center;

@@ -25,7 +25,7 @@ export default function ReadPage() {
         const data = await response.json();
         setPost(data);
         setPageInfo({
-          title: <img src={logo} className='header-logo' />,
+          title: "B",
           author: data.userNick,
           isHome: false,
         });
