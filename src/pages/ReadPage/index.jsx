@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentArea from '../../shared/ui/Comment';
 import logo from '../../app/assets/logo2.png';
+import { marked } from 'marked';
 
 export default function ReadPage() {
   // URL 파라미터에서 postId 추출
@@ -103,6 +104,16 @@ export default function ReadPage() {
       alert('댓글 작성에 실패했습니다');
     }
   };
+  const handleDeletePost = async() => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/read/delete/${postId}`, {
+        method: 'GET',
+      });
+    } catch (err){
+      console.error(err);
+      alert('네트워크 오류 발생');
+    }
+  };
 
   const handleDelete = () => {};
 
@@ -136,16 +147,21 @@ export default function ReadPage() {
       <section className="post-content">
         <div className="post-content-wrapper">
           {post.postContent.split('\n\n').map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
+            <div key={index}><div
+                      className="markdown-body"
+                      dangerouslySetInnerHTML={{ __html: marked(paragraph)}}
+                    /></div>
             
           ))}
-          {post.thumbnail && (
+          {/* {post.thumbnail && (
             <img src={post.thumbnail} alt={post.postTitle} className="content-image" />
-          )}
+          )} */}
         </div>
         <div className="reaction-buttons">
           <button className="reaction-btn"><FaHeart /><span>{post.likeCount}</span></button>
           <button className="reaction-btn"><FaShareAlt /></button>
+          {(post.userId == userReply.id)?<button className='post-delete-button'
+            onClick={handleDeletePost}>삭제하기</button>:""}
         </div>
       </section>
 
