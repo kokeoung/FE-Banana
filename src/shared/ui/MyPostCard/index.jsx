@@ -1,4 +1,3 @@
-import { Slice } from "lucide-react"
 import "./MyPostCard.css"
 
 export default function MyPostCard({thumbnail,postTitle,postContent,createDateTime,likeCount}){
