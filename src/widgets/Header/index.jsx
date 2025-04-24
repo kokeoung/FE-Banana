@@ -1,6 +1,7 @@
 import './Header.css';
 import { CgSearch } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
+import logo from '../../app/assets/logo1.png' 
 
 
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
@@ -106,7 +107,7 @@ export default function Header() {
   <p className='header-titie'>
       {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
       {pageInfo.isHome ?
-        (<Link to="/">Banana</Link>) : 
+        (<Link to="/"><img src={logo} className='header-logo' /></Link>) : 
         (
           <>
             <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
