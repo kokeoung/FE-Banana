@@ -47,18 +47,12 @@ export default function Header() {
     setIsLoggedIn(user);
   }, []);
 
-
-    const handleLogin = () => {
-      // 여기서 직접 로그인 처리
-      localStorage.setItem('id', JSON.stringify({ name: 'nick' }));
-      setIsLoggedIn(true); };
-    
-    
-
-
-
+  const handleLogin = () => {
+    // 여기서 직접 로그인 처리
+    localStorage.setItem('id', JSON.stringify({ name: 'nick' }));
+    setIsLoggedIn(true); 
+  };
   const { pageInfo } = usePageContext();
-
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -108,34 +102,26 @@ export default function Header() {
 
 
   return(<>
-
-
-{/*author*/}
-
   <header className='header'>
-
   <p className='header-titie'>
       {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
       {pageInfo.isHome ?
         (<Link to="/">Banana</Link>) : 
         (
-        <>
-          <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
-          {/* 작성자가 있으면 @작성자명 표시 */}
-          {pageInfo.author && (
-            <span className="author-link">@{pageInfo.author}</span>
-          )}
-        </>
-      )}
+          <>
+            <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
+            {/* 작성자가 있으면 @작성자명 표시 */}
+            {pageInfo.author && (
+              <span className="author-link">@{pageInfo.author}</span>
+            )}
+          </>
+        )}
     </p>
     
     <section className='header-buttons'>
-
         <div className='headersearch-icon'>
-              <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
-          </div>
-
-      
+            <button className='search-button' onClick={handleSearchClick}><CgSearch /></button>
+        </div>
         {isLoggedIn? ( <>
           <div className='pageadd-btn'>
             <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
@@ -167,11 +153,7 @@ export default function Header() {
           </div>
           </>
         
-        )}
-
-        
-        
-      
+        )} 
     </section>
     </header>
   </>)
