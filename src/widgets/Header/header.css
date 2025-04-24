@@ -43,23 +43,25 @@
 display: flex;
 align-items: center;
 justify-content: center;
-background-color: #ffff;
+
 color: rebeccapurple;
 border-radius: 8px;
 cursor: pointer;
 Margin-left: 15px;
+padding: 5px 0px;
 }
 .pageadd-btn{
 
 display: flex;
 align-items: center;
 justify-content: center;
-background-color: #ffff;
+
 color: rebeccapurple;
 cursor: pointer;
 border-radius: 8px;
 cursor: pointer;
 Margin-left: 15px;
+padding: 5px 0px;
 }
 .headersearch-icon {
   font-size: 30px;
@@ -92,6 +94,7 @@ Margin-left: 15px;
   justify-content: center;
   align-items: center;
   Margin-left: 15px;
+  padding: 6px 0px;
 }
 
 .header-filter {

@@ -60,7 +60,8 @@ export default function Header() {
     setIsDropdownOpen(prev => !prev);
   };
 
-  
+
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
@@ -79,8 +80,12 @@ export default function Header() {
   
     } else  {
       console.log("로그아웃 취소");
-    }
+    }  
+    
   };
+
+  
+    
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -98,6 +103,8 @@ export default function Header() {
 
 
 {/*author*/}
+
+
 
   <header className='header'>
 
@@ -128,8 +135,8 @@ export default function Header() {
             <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
           </div>
 
-          <div className='user-icon' >
-          <FaUserCircle />
+          <div className='user-icon' ref={dropdownRef} >
+          <FaUserCircle onClick={toggleDropdown} />
           </div>
 
           <div className='header-filter' ref={dropdownRef}>
