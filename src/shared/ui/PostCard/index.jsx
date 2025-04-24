@@ -9,7 +9,7 @@ const formatDate = (dateString) => {
   return `${year}년 ${month}월 ${day}일`;
 };
 
-export default function PostCard({postId, postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
+export default function PostCard({postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
 
   return(<>
     <div className="postcard-card">
@@ -25,7 +25,7 @@ export default function PostCard({postId, postTitle,postContent,thumbnail,create
         <div>{children}</div>
         <div className="postcard-like">
           <div>🖤</div>
-          <div className="postcard-likes">{likes}</div>
+          <div className="postcard-likes">{likeCount}</div>
 
         </div>
       </div>

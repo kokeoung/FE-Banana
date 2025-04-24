@@ -78,7 +78,7 @@ export default function Header() {
 
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
-    if (option === '내 블로그') navigate(`/my/${userData.userId}`);
+    if (option === '내 블로그') navigate(`/my/${userData.userId}/posts`);
     else if (option === '새 글 작성') navigate('/write');
     else if (option === '임시 글'); // 임시로 마이페이지로 설정 
     else if (option === '로그아웃') {

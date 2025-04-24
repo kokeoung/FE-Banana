@@ -3,7 +3,7 @@ import "./MyPostCard.css"
 
 export default function MyPostCard({thumbnail,postTitle,postContent,createDateTime,likeCount}){
 
-  const cleanedText = content.replace(/!\[.*?\]\(data:image\/.*?\)/g, '');
+  const cleanedText = postContent.replace(/<[^>]*>/g, "");
   const previewText = (cleanedText.length > 150)?cleanedText.slice(0, 150) + "...":cleanedText;
   const time = createDateTime.split('T')[0];
 

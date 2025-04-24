@@ -59,11 +59,11 @@ export default function Posts(){
         <Link key={i}  
               to={`/posts/${post.postId}`}>
           <MyPostCard
-            imageUrl={post.thumbnail} 
-            title={post.postTitle} 
-            content={post.postContent} 
-            createdAt={post.createDateTime} 
-            liked={post.likeCount} />
+            thumbnail={post.thumbnail} 
+            postTitle={post.postTitle} 
+            postContent={post.postContent} 
+            createDateTime={post.createDateTime} 
+            likeCount={post.likeCount} />
         </Link>      
       ))}
       </div>)}
