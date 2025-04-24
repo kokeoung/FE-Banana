@@ -89,6 +89,13 @@ Margin-left: 15px;
   Margin-left: 15px;
 }
 
+.user-icon > img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid rgb(197, 197, 197);
+}
+
 .header-filter {
   position: relative;
   z-index: 900;
