@@ -141,7 +141,7 @@ export default function Header() {
 
 
           <div className='user-icon' >
-            <img src={userProfile || DefaultImage} alt="유저프로필" />
+            <img src={userProfileImage || DefaultImage} alt="유저프로필" />
           </div>
 
           <div className='header-filter' ref={dropdownRef}>
