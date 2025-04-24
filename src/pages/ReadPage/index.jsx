@@ -15,6 +15,10 @@ export default function ReadPage() {
   const { setPageInfo } = usePageContext();
 
   useEffect(() => {
+    console.log('post 데이터 확인:', post);
+  }, [post]);
+
+  useEffect(() => {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
@@ -50,7 +54,9 @@ export default function ReadPage() {
   if (error) return <div>Error: {error.message}</div>;
   if (!post) return null;
 
+
   return (
+  <div className="read-page-wrapper">
     <main className="read-page">
       <section className="post-header">
         <h1 className="post-title">{post.postTitle}</h1>
@@ -74,7 +80,7 @@ export default function ReadPage() {
       </section>
 
       <section className="post-content">
-        <div className="content-wrapper">
+        <div className="post-content-wrapper">
           {post.postContent.split('\n\n').map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
@@ -127,5 +133,6 @@ export default function ReadPage() {
         ))}
       </section>
     </main>
+  </div>
   );
 }
