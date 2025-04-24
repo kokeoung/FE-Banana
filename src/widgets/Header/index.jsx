@@ -17,12 +17,33 @@ export default function Header() {
 
   // 로그인 사라지게 하는 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile,setUserProfile] =  useState("");
   const user = localStorage.getItem('user');
   const userData = JSON.parse(user);
 
   useEffect(() => {
-    
-    console.log(user)
+    async function fetchProfile(){
+      try {
+        const url = `http://localhost:8080/api/header`;
+        const sendData = {
+            userId: userData.userId,
+        }
+        const init = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(sendData)
+        }
+        const response = await fetch(url, init);
+        const data = await response.text();
+        console.log("유저 프로필 입니다",data);
+        setUserProfile(data);
+      } catch (err) {
+        // setError(err);
+      } finally {
+        // setIsLoading(false);
+      }
+    };
+    fetchProfile();
     setIsLoggedIn(user);
   }, []);
 
@@ -121,7 +142,7 @@ export default function Header() {
           </div>
 
           <div className='user-icon' >
-          <FaUserCircle />
+            <img src={userProfile} alt="유저프로필" />
           </div>
 
           <div className='header-filter' ref={dropdownRef}>
