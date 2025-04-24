@@ -5,6 +5,7 @@ import { usePageContext } from '../../app/providers/PageContext';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentArea from '../../shared/ui/Comment';
+import logo from '../../app/assets/logo2.png';
 
 export default function ReadPage() {
   const { postId } = useParams();
@@ -28,7 +29,7 @@ export default function ReadPage() {
         const data = await response.json();
         setPost(data);
         setPageInfo({
-          title: 'B',
+          title: "B",
           author: data.userNick,
           isHome: false,
         });

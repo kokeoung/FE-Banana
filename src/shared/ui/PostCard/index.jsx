@@ -1,4 +1,5 @@
 import './PostCard.css';
+import defaultImage from "../../../app/assets/default_background.svg"
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -17,7 +18,7 @@ export default function PostCard({postTitle,postContent,thumbnail,createDateTime
   return(<>
     <div className="postcard-card">
       <div className="postcard-header">
-        <img src={thumbnail} className="postcard-img"/>
+        <img src={thumbnail || defaultImage} className="postcard-img"/>
       </div>
       <div className="postcard-main">
         <div className="postcard-title">{postTitle}</div>

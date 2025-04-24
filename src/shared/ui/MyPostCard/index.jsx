@@ -1,4 +1,5 @@
 import "./MyPostCard.css"
+import defaultImage from "../../../app/assets/default_background.svg"
 
 export default function MyPostCard({thumbnail,postTitle,postContent,createDateTime,likeCount}){
 
@@ -9,7 +10,7 @@ export default function MyPostCard({thumbnail,postTitle,postContent,createDateTi
   return(<>
     <div className="mypostcard-container">
       <div className="mypostcard-header">
-        <img src={thumbnail} alt="포스트 이미지" />
+        <img src={thumbnail || defaultImage} alt="포스트 이미지" />
       </div>
       <div className="mypostcard-main">
         <div className="mypostcard-title">{postTitle}</div>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Modal from "../../shared/ui/Modal";
 import Input from "../../shared/ui/Input"
 import { usePageContext } from "../../app/providers/PageContext";
+import logo from '../../app/assets/logo2.png';
 
 export default function MyPage(){
   const { userId } = useParams();
@@ -19,7 +20,7 @@ export default function MyPage(){
 
   useEffect(() => { 
     setPageInfo({
-      title: 'B',
+      title: "B",
       author: userId,
       isHome: false
     });
