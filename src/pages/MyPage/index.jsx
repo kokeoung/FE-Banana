@@ -20,7 +20,7 @@ export default function MyPage(){
 
   useEffect(() => { 
     setPageInfo({
-      title: <img src={logo} className='header-logo' />,
+      title: "B",
       author: userId,
       isHome: false
     });

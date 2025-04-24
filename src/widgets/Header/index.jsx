@@ -68,11 +68,18 @@ export default function Header() {
     else if (option === '새 글 작성') navigate('/write');
     else if (option === '임시 글'); // 임시로 마이페이지로 설정 
     else if (option === '로그아웃') {
-      alert("로그아웃 처리");
-      localStorage.removeItem('user');      // 저장된 로그인 정보 삭제
-      setIsLoggedIn(false);                 // 상태 업데이트해서 버튼 바꾸기
-      navigate('/');       
-    } // 나중에 로직 연결
+      const confirmLogout = window.confirm("로그아웃 하시겠습니까?");
+      if (confirmLogout) { 
+        
+        localStorage.removeItem('user');      // 저장된 로그인 정보 삭제
+        setIsLoggedIn(false ,true);                 // 상태 업데이트해서 버튼 바꾸기
+        navigate('/'); 
+      }
+     
+  
+    } else  {
+      console.log("로그아웃 취소");
+    }
   };
 
   useEffect(() => {
@@ -97,7 +104,7 @@ export default function Header() {
   <p className='header-titie'>
       {/* 홈페이지면 'Banana', 아니면 포스트 제목과 작성자 표시 */}
       {pageInfo.isHome ?
-        (<Link to="/"><img src={logo} className='header-logo' /></Link>) : 
+        (<Link to="/">Banana</Link>) : 
         (
         <>
           <Link to="/"><span className='header-titie-author'>{pageInfo.title}</span></Link>
