@@ -74,7 +74,8 @@ export default function Header() {
     setIsDropdownOpen(prev => !prev);
   };
 
-  
+
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
@@ -93,8 +94,12 @@ export default function Header() {
   
     } else  {
       console.log("로그아웃 취소");
-    }
+    }  
+    
   };
+
+  
+    
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -133,6 +138,7 @@ export default function Header() {
           <div className='pageadd-btn'>
             <Button size={"m"}  value="새 글 작성" onClick={handleWriteClick}/> 
           </div>
+
 
           <div className='user-icon' >
             <img src={userProfile || DefaultImage} alt="유저프로필" />
