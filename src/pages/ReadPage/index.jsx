@@ -137,6 +137,7 @@ export default function ReadPage() {
         <div className="post-content-wrapper">
           {post.postContent.split('\n\n').map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
+            
           ))}
           {post.thumbnail && (
             <img src={post.thumbnail} alt={post.postTitle} className="content-image" />
