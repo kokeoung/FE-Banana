@@ -11,6 +11,9 @@ const formatDate = (dateString) => {
 
 export default function PostCard({postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
 
+  const cleanedText = postContent.replace(/<[^>]*>/g, "");
+  const previewText = (cleanedText.length > 150)?cleanedText.slice(0, 150) + "...":cleanedText;
+
   return(<>
     <div className="postcard-card">
       <div className="postcard-header">
@@ -18,7 +21,7 @@ export default function PostCard({postTitle,postContent,thumbnail,createDateTime
       </div>
       <div className="postcard-main">
         <div className="postcard-title">{postTitle}</div>
-        <div className="postcard-content">{postContent}</div>
+        <div className="postcard-content">{previewText}</div>
         <div className="postcard-date">{formatDate(createDateTime)}</div>
       </div>
       <div className="postcard-footer">
@@ -26,7 +29,6 @@ export default function PostCard({postTitle,postContent,thumbnail,createDateTime
         <div className="postcard-like">
           <div>🖤</div>
           <div className="postcard-likes">{likeCount}</div>
-
         </div>
       </div>
     </div>
