@@ -6,6 +6,7 @@ import { usePageContext } from '../../app/providers/PageContext';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentArea from '../../shared/ui/Comment';
+import logo from '../../app/assets/logo2.png';
 
 export default function ReadPage() {
   // URL 파라미터에서 postId 추출
@@ -28,6 +29,10 @@ export default function ReadPage() {
 
   // 게시글 & 댓글 데이터 fetch
   useEffect(() => {
+    console.log('post 데이터 확인:', post);
+  }, [post]);
+
+  useEffect(() => {
     const fetchPost = async () => {
       try {
         setIsLoading(true);
@@ -35,7 +40,12 @@ export default function ReadPage() {
         if (!response.ok) throw new Error("게시글을 불러오는 데 실패했습니다.");
         const data = await response.json();
         setPost(data);
-        setPageInfo({ title: 'B', author: data.userNick, isHome: false }); // 페이지 상단 제목 설정
+        
+        setPageInfo({
+          title: "B",
+          author: data.userNick,
+          isHome: false,
+        });
       } catch (err) {
         setError(err);
       } finally {
@@ -100,7 +110,9 @@ export default function ReadPage() {
   if (error) return <div>Error: {error.message}</div>;
   if (!post) return null;
 
+
   return (
+  <div className="read-page-wrapper">
     <main className="read-page">
       {/* 게시글 헤더 영역 */}
       <section className="post-header">
@@ -122,7 +134,7 @@ export default function ReadPage() {
 
       {/* 게시글 본문 영역 */}
       <section className="post-content">
-        <div className="content-wrapper">
+        <div className="post-content-wrapper">
           {post.postContent.split('\n\n').map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
@@ -190,5 +202,6 @@ export default function ReadPage() {
         ))}
       </section>
     </main>
+  </div>
   );
 }

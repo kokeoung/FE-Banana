@@ -1,4 +1,5 @@
 import './PostCard.css';
+import defaultImage from "../../../app/assets/default_background.svg"
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -9,16 +10,19 @@ const formatDate = (dateString) => {
   return `${year}년 ${month}월 ${day}일`;
 };
 
-export default function PostCard({postId, postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
+export default function PostCard({postTitle,postContent,thumbnail,createDateTime,likeCount,children}){
+
+  const cleanedText = postContent.replace(/<[^>]*>/g, "");
+  const previewText = (cleanedText.length > 150)?cleanedText.slice(0, 150) + "...":cleanedText;
 
   return(<>
     <div className="postcard-card">
       <div className="postcard-header">
-        <img src={thumbnail} className="postcard-img"/>
+        <img src={thumbnail || defaultImage} className="postcard-img"/>
       </div>
       <div className="postcard-main">
         <div className="postcard-title">{postTitle}</div>
-        <div className="postcard-content">{postContent}</div>
+        <div className="postcard-content">{previewText}</div>
         <div className="postcard-date">{formatDate(createDateTime)}</div>
       </div>
       <div className="postcard-footer">
@@ -26,7 +30,6 @@ export default function PostCard({postId, postTitle,postContent,thumbnail,create
         <div className="postcard-like">
           <div>🖤</div>
           <div className="postcard-likes">{likeCount}</div>
-
         </div>
       </div>
     </div>

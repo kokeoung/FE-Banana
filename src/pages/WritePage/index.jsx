@@ -48,8 +48,9 @@ export default function WritePage() {
   }
 
   const handleChange = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
-    const thumbnail = firstImageFind(editorContent);
+    const editorContent = editorRef.current.getInstance().getHTML();
+    const imageFind = editorRef.current.getInstance().getMarkdown();
+    const thumbnail = firstImageFind(imageFind);
     setContent(editorContent);
     setThumbnail(thumbnail);
   };
@@ -90,7 +91,7 @@ export default function WritePage() {
     const imageUrl = await uploadToS3(blob);
 
     // 2. Toast UI에 이미지 삽입
-    callback(imageUrl, '이미지 설명');
+    callback(imageUrl, '이미지');
   };
 
   const uploadToS3 = async (file) => {

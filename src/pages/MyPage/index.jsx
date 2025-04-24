@@ -5,17 +5,12 @@ import { useEffect, useState } from "react";
 import Modal from "../../shared/ui/Modal";
 import Input from "../../shared/ui/Input"
 import { usePageContext } from "../../app/providers/PageContext";
+import logo from '../../app/assets/logo2.png';
 
 export default function MyPage(){
   const { userId } = useParams();
   const [active,setActive] = useState({myli1:"active",myli2:"",myli3:""});
-
-  const [user, setUser] = useState({
-    userProfileImage: "",
-    userNick: "",
-    userAbout: "",
-  });
-
+  const [user,setUser] = useState({});
   const [modalClose,setModalClose] = useState(false);
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
@@ -25,11 +20,12 @@ export default function MyPage(){
 
   useEffect(() => { 
     setPageInfo({
-      title: 'B',
+      title: "B",
       author: userId,
       isHome: false
     });
     
+  
     return () => {
       setPageInfo({
       title: 'Banana',
@@ -56,7 +52,8 @@ export default function MyPage(){
         const response = await fetch(url, init);
         const data = await response.json();
         setUser(data);
-        console.log(data);
+        console.log("데이터 정보",data);
+        
       } catch (err) {
         // setError(err);
       } finally {
@@ -64,6 +61,7 @@ export default function MyPage(){
       }
     };
       fetchUser();
+      console.log("유저정보",user.userAbout);
       
       return () => {
         setPageInfo({
@@ -101,6 +99,7 @@ export default function MyPage(){
         body: formData, // Content-Type 자동 설정됨 
       });
       const data = await response.json();
+      setUser(data);
     } catch(err) {
     }
     window.location.reload();
@@ -110,7 +109,7 @@ export default function MyPage(){
     <div className="my-container">
       <div className="my-header">
         <div className="my-profile">
-          <MyUserProfile profileImage={user.userProfile} nickname={user.userNick} about={user.userAbout}/>
+          <MyUserProfile userProfileImage={user.userProfile} userNick={user.userNick} userAbout={user.userAbout}/>
         </div>
         <div className="my-setting-btn">
           <button onClick={()=>{setModalClose(true);setAbout(user.userAbout);setNick(user.userNick)}}>정보 수정</button>
