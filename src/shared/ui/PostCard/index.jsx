@@ -25,7 +25,7 @@ export default function PostCard({postId, postTitle,postContent,thumbnail,create
         <div>{children}</div>
         <div className="postcard-like">
           <div>🖤</div>
-          <div className="postcard-likes">{likes}</div>
+          <div className="postcard-likes">{likeCount}</div>
 
         </div>
       </div>

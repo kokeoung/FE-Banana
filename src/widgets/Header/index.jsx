@@ -17,7 +17,7 @@ export default function Header() {
 
   // 로그인 사라지게 하는 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userProfile,setUserProfile] =  useState("");
+  const [userProfileImage,setUserProfileImage] =  useState("");
   const user = localStorage.getItem('user');
   const userData = JSON.parse(user);
 
@@ -36,7 +36,7 @@ export default function Header() {
         const response = await fetch(url, init);
         const data = await response.text();
         console.log("유저 프로필 입니다",data);
-        setUserProfile(data);
+        setUserProfileImage(data);
       } catch (err) {
         // setError(err);
       } finally {
@@ -128,14 +128,13 @@ export default function Header() {
           </div>
 
           <div className='user-icon' >
-            <img src={userProfile} alt="유저프로필" />
+            <img src={userProfileImage} alt="유저프로필" />
           </div>
 
           <div className='header-filter' ref={dropdownRef}>
                   <button className="dropdown-toggle" onClick={toggleDropdown}>
                     <FaAngleDown />
                   </button>
-
                   {isDropdownOpen && (
                     <div className="dropdown-menu">
                       {filterOptions.map(option => (
