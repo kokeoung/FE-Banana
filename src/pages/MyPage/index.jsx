@@ -8,11 +8,41 @@ import Input from "../../shared/ui/Input"
 export default function MyPage(){
   const { userId } = useParams();
   const [active,setActive] = useState({myli1:"active",myli2:"",myli3:""});
-  const [user,setUser] = useState([""]);
+
+  const [user, setUser] = useState({
+    userProfileImage: "",
+    userNick: "",
+    userAbout: "",
+  });
+
   const [modalClose,setModalClose] = useState(false);
   const [nick,setNick] = useState("");
   const [about,setAbout] = useState("");
   const [file, setFile] = useState(null);
+
+  const { setPageInfo } = usePageContext();
+
+  useEffect (() => {
+    localStorage.setItem("item", 10);
+  })
+  
+  // useEffect(() => { 
+  //   setPageInfo({
+  //     title: 'B',
+  //     author: userId,
+  //     isHome: false
+  //   });
+    
+  
+  //   return () => {
+  //     setPageInfo({
+  //     title: 'Banana',
+  //     author: null,
+  //     isHome: true
+  //     });
+  //   };
+  // }, [userId ,setPageInfo]);
+
   useEffect(() => {
       
     async function fetchUser(){
@@ -75,9 +105,7 @@ export default function MyPage(){
     const data = await response.json();
       
     } catch(err) {
-
     }
-  }
 
   return(<>
     <div className="my-container">
@@ -85,6 +113,16 @@ export default function MyPage(){
         <div className="my-profile">
           <MyUserProfile profileImage={user.userProfile} nickname={user.userNick} about={user.userAbout}/>
         </div>
+        {fromUserId  !== userId && (
+            <div className="follow-button-container">
+              <button
+                className={`follow-btn ${user.isFollowing ? "unfollow" : "follow"}`}
+                onClick={handleFollow}
+              >
+                {user.isFollowing ? "언팔로우" : "팔로우"}
+              </button>
+            </div>
+          )}
         <div className="my-setting-btn">
           <button onClick={()=>{setModalClose(true)}}>정보 수정</button>
         </div>
@@ -125,4 +163,5 @@ export default function MyPage(){
       </div>
     </div>
   </>)
+  }
 }

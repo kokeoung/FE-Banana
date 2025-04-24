@@ -56,8 +56,8 @@ export default function HomePage() {
             key={post.postId}
             postTitle={post.postTitle}
             postContent={post.postContent}
-            imageUrl={post.imageUrl}
-            createDate={post.createDate}
+            thumbnail={post.thumbnail}
+            createDateTime={post.createDateTime}
             likeCount={post.likeCount}
           >
           <UserProfile

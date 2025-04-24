@@ -61,7 +61,7 @@
 /* 내용 미리보기 */
 .postcard-card > .postcard-main > .postcard-content {
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 14px;
@@ -89,4 +89,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.postcard-date {
+  font-size: 12px;
 }
