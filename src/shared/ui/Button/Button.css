@@ -35,3 +35,16 @@
   color: black;
   font-weight: 600;
 }
+@media (max-width: 1024px) {
+  .btn-container > .btn-m {
+    width: 80px; 
+    height: 24px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 425px) {
+  .btn-container > .btn-m {
+    width: 72px; 
+    font-size: 12px;
+  }
+}

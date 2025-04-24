@@ -38,32 +38,41 @@ export default function SearchPage() {
 
   //fetch로 백앤드 API 호출
   useEffect(()=>{
-    const fetchApi=async()=>{
+    let isMounted=true;
+
+    const fetchSearchResults=async()=>{
+      if(!searchTerm) return;
+
       try{
       setLoading(true);
-      console.log("연결에 성공했나용?");
-      
-      const response = await fetch('http://localhost:8080/api/search',{
+      console.log("검색 API 호출 중~~");
+      const response = await fetch(`http://localhost:8080/api/search/keyword`,{
         method:'POST',
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({keyword: searchTerm}),
       });
       if(!response.ok){
         throw new Error (`서버 응답 오류: ${response.status}`);
       }
       const data=await response.json();
       setPosts(data);
-      console.log('게시글 데이터 불러오기 성공~:',data)
+      console.log('검색 결과 : ',data)
       } catch (error){
-        console.error('게시글 불러오기 실패..~:', error)
+        console.error('검색 중 오류 발생 : ', error)
       } finally {
         setLoading(false);
       }
     };
-    fetchApi();
-  },[]);
+    const delay=setTimeout(()=>{
+      fetchSearchResults();
+    }, 500); //500ms 디바운싱 후 결과 호출
+    return()=>{
+      isMounted=false;
+      clearTimeout(delay)
+    }; //cleanup
+  },[searchTerm]);
 
 
   //화면 크기 변경 감지
@@ -88,7 +97,6 @@ export default function SearchPage() {
   const handleWrapperClick=()=>{
     inputRef.current?.focus();
   }
-
 
   return (<>
     <div className="search-wrap">
@@ -117,7 +125,13 @@ export default function SearchPage() {
         </form>
       </div>
       <div className="search-result">
-        {isSearching && <SearchResults />}
+        {isSearching && 
+          <SearchResults
+            posts={posts}
+            loading={loading}
+            query={searchTerm}
+            // authors={authorMap}
+           />}
       </div>
     </div>
     </>);
