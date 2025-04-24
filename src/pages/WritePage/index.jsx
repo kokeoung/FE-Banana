@@ -48,7 +48,7 @@ export default function WritePage() {
   }
 
   const handleChange = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
+    const editorContent = editorRef.current.getInstance().getHTML();
     const thumbnail = firstImageFind(editorContent);
     setContent(editorContent);
     setThumbnail(thumbnail);

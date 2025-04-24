@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PostCard from '../../shared/ui/PostCard';
 import UserProfile from '../../shared/ui/UserProfile';
 import FilterDropdown from '../../shared/ui/FilterDropdown';
@@ -31,6 +31,7 @@ export default function HomePage() {
     .catch((error) => {
       console.log("포스트 데이터 가져오기 실패: ", error)
     });
+    console.log(posts)
   }, []);
 
   return (
@@ -56,14 +57,18 @@ export default function HomePage() {
             key={post.postId}
             postTitle={post.postTitle}
             postContent={post.postContent}
-            imageUrl={post.imageUrl}
-            createDate={post.createDate}
+            thumbnail={post.thumbnail}
+            createDateTime={post.createDateTime}
             likeCount={post.likeCount}
           >
-          <UserProfile
-            userProfileImage={post.userProfileImage}
-            userNick={post.userNick}
-          />
+            <Link 
+              to={`/my/${post.userId}/posts`}
+              onClick={(e) => e.stopPropagation()}>
+              <UserProfile
+                userProfileImage={post.userProfileImage}
+                userNick={post.userNick}
+              />
+            </Link>
           </PostCard>
           </div>
         ))}
