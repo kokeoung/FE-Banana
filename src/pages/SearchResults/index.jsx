@@ -43,7 +43,7 @@ export default function SearchResults({ posts=[], loading, query='' }) {
                                     thumbnail={post.thumbnail}
                                     createDateTime={post.createDateTime}
                                     likeCount={post.likeCount}
-                                    // comments={post.comments}
+                                    comments={post.comments}
                                 >
                                     <SearchUserProfile
                                         profileImage={post.userProfileImage}
