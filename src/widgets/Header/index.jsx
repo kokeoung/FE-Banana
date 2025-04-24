@@ -74,9 +74,6 @@ export default function Header() {
     setIsDropdownOpen(prev => !prev);
   };
 
-
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-
   const handleOptionClick = (option) => {
     setIsDropdownOpen(false);
     if (option === '내 블로그') navigate(`/my/${userData.userId}/posts`);
