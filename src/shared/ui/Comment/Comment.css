@@ -14,6 +14,13 @@
   line-height: 1.5;
 }
 
+.profile-image {
+  width: 40px;      
+  height: 40px;       
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .comment-form textarea:focus {
   outline: none;
   border-color: #666;
@@ -29,11 +36,6 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #eee;
-}
-
-.comment:last-child {
-  border-bottom: none;
 }
 
 .comment-avatar {
@@ -65,4 +67,17 @@
 .comment-content p {
   margin: 0;
   line-height: 1.6;
+  padding-top: 1rem;
+}
+
+.comment-delete {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  padding-top: 1rem;
+  padding-left: 40rem;
+  text-decoration: underline;
+  user-select: text; 
 }

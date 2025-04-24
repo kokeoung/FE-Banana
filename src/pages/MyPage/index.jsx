@@ -63,16 +63,26 @@ export default function MyPage(){
       fetchUser();
       console.log("유저정보",user.userAbout);
       
+      return () => {
+        setPageInfo({
+          title: 'Banana',
+          author: null,
+          isHome: true
+        });
+      };
   }, [userId]);
+
   function handleClick(e){
     const {id} = e.currentTarget;
     setActive({myli1:"",myli2:"",myli3:""})
     setActive(prev => ({...prev,[id]:"active"}))
   }
+
   function handleLabelChange(e){  
     setFile(e.target.files[0])
     setFileName(e.currentTarget.files[0].name)
   }
+
   async function handleChangeUserData(){
     const url = `http://localhost:8080/api/my/change`;
     const nickCheck = nick?nick:(user.userNick);
