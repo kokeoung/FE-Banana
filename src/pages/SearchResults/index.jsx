@@ -37,6 +37,7 @@ export default function SearchResults({ posts=[], loading, query='' }) {
                         {results.map((post, index) => (
                             <div key={post.postId} className="search-result-item">
                                 <SearchPostCard
+                                    postId={post.postId}
                                     postTitle={post.postTitle}
                                     postContent={post.postContent}
                                     thumbnail={post.thumbnail}
