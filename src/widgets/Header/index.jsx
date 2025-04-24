@@ -156,7 +156,7 @@ export default function Header() {
         </>   ) : (
           <>
           <div className='login-btn'> 
-            <Button size={"m"} value="로그인" onClick={() =>{handleLoginClick(); handleLogin(); }}/>
+            <Button size={"m"} value="로그인" onClick={() =>{handleLoginClick(); handleLogin();}}/>
           </div>
           </>
         
