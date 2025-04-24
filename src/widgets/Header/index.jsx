@@ -1,7 +1,6 @@
 import './Header.css';
 import { CgSearch } from "react-icons/cg";
-import { FaUserCircle } from "react-icons/fa";
-import logo from '../../app/assets/logo1.png' 
+import DefaultImage from "../../app/assets/userprofile.png";
 
 
 import { usePageContext } from '../../app/providers/PageContext';  // Context 훅 import
@@ -136,7 +135,7 @@ export default function Header() {
           </div>
 
           <div className='user-icon' >
-            <img src={userProfile} alt="유저프로필" />
+            <img src={userProfile || DefaultImage} alt="유저프로필" />
           </div>
 
           <div className='header-filter' ref={dropdownRef}>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoginForm from "../../features/ui/LoginForm";
 import SignupForm from "../../features/ui/SignupForm";
 import "./AuthPage.css";
-import Logo from "../../app/assets/banana.png";
+import Logo from "../../app/assets/banana.png"
 
 export default function AuthPage(){
   
