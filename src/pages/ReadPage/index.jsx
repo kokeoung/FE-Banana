@@ -166,7 +166,7 @@ export default function ReadPage() {
         <div className="reaction-buttons">
           <button className="reaction-btn"><FaHeart /><span>{post.likeCount}</span></button>
           <button className="reaction-btn"><FaShareAlt /></button>
-          {(post.userId == userReply.id)?<button className='post-delete-button'
+          {(post.userId == userReply?.id)?<button className='post-delete-button'
             onClick={handleDeletePost}>삭제하기</button>:""}
         </div>
       </section>
