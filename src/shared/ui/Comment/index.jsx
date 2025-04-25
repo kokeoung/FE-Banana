@@ -20,9 +20,9 @@ export default function CommentArea({author,userId,userProfileImage,createdAt,co
           <span className="comment-author">{author}</span>
           <span className="comment-date">{createdAt}</span>
         </div>
-        <p>{content}</p>
         <div className="comment-footer">
-            <button className="comment-delete" onClick={onDeleteClick}>삭제</button>
+          <p>{content}</p>
+          <button className="comment-delete" onClick={onDeleteClick}>삭제</button>
         </div>
       </div>
     </div>
