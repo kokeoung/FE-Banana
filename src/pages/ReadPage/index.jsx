@@ -111,15 +111,16 @@ export default function ReadPage() {
     if(!deletedPost) return;
 
     try {
-      const response = await fetch(`http://localhost:8080/api/read/delete/${postId}`, {
-        method: 'GET',
-      });
+      await fetch(`http://localhost:8080/api/read/delete/${postId}`, {method: 'GET',});
     } catch (err){
       console.error(err);
       alert('네트워크 오류 발생');
     }
     Navigate("/");
   };
+  function handleUpdatePost (){
+    Navigate(`/write/${post.postId}`);
+  }
 
   const handleDelete = () => {};
 
@@ -156,16 +157,15 @@ export default function ReadPage() {
             <div key={index}><div
                       className="markdown-body"
                       dangerouslySetInnerHTML={{ __html: marked(paragraph)}}
-                    /></div>
-            
+                    />
+            </div>
           ))}
-          {/* {post.thumbnail && (
-            <img src={post.thumbnail} alt={post.postTitle} className="content-image" />
-          )} */}
         </div>
         <div className="reaction-buttons">
           <button className="reaction-btn"><FaHeart /><span>{post.likeCount}</span></button>
           <button className="reaction-btn"><FaShareAlt /></button>
+          {(post.userId == userReply?.id)?<button className='post-update-button'
+            onClick={handleUpdatePost}>수정하기</button>:""}
           {(post.userId == userReply?.id)?<button className='post-delete-button'
             onClick={handleDeletePost}>삭제하기</button>:""}
         </div>
