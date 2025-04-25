@@ -170,39 +170,7 @@ export default function ReadPage() {
             <Button className="follow-btn" size="m" value="팔로우" />
           </div>
         </section>
-
-        {/* 게시글 본문 영역 */}
-        <section className="post-content">
-          <div className="post-content-wrapper">
-            {post.postContent.split('\n\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-            {post.thumbnail && (
-              <img src={post.thumbnail} alt={post.postTitle} className="content-image" />
-            )}
-          </div>
-          <div className="reaction-buttons">
-            <button className="reaction-btn"><FaHeart /><span>{post.likeCount}</span></button>
-            <button className="reaction-btn"><FaShareAlt /></button>
-          </div>
-        </section>
-
-        {/* 작성자 프로필 */}
-        <section className="author-profile">
-          <div className="profile-info">
-            {post.userProfileImage ? (
-              <img src={post.userProfileImage} alt={post.userNick} className="profile-avatar" />
-            ) : (
-              <FaUserCircle className="profile-avatar" />
-            )}
-            <div className="profile-details">
-              <h3>{post.userNick}</h3>
-            </div>
-          </div>
-          <Button className="follow-btn" size="m" value="팔로우" />
-        </div>
-      </section>
-
+        
       {/* 게시글 본문 영역 */}
       <section className="post-content">
         <div className="post-content-wrapper">
@@ -258,23 +226,27 @@ export default function ReadPage() {
       <section className="comments">
         {comments.map((comment) => (
           <div key={comment.commentId} className="comment-wrapper">
-                <CommentArea
-                  comment={comment}
-                  userId={comment.userId} 
-                  userProfileImage={comment.userProfileImage}
-                  author={comment.userNick}
-                  createdDateTime={comment.createdDateTime}
-                  content={comment.content}
-                  onDeleteClick={() => handleDelete(comment.commentId)} 
-                />
-                {userReply.userId === comment.userId ? (
-                  <div className="comment-footer">
-                    <button className="comment-delete" onClick={() => handleDelete(comment.commentId)}>삭제</button>
-                  </div>
-                ) : ""}
+            <CommentArea
+              comment={comment}
+              userId={comment.userId}
+              userProfileImage={comment.userProfileImage}
+              author={comment.userNick}
+              createdDateTime={comment.createdDateTime}
+              content={comment.content}
+              onDeleteClick={() => handleDelete(comment.commentId)}
+            />
+            {userReply.userId === comment.userId && (
+              <div className="comment-footer">
+                <button
+                  className="comment-delete"
+                  onClick={() => handleDelete(comment.commentId)}
+                >
+                  삭제
+                </button>
               </div>
-            );
-          })}
+            )}
+          </div>
+        ))}
         </section>
       </main>
     </div>
