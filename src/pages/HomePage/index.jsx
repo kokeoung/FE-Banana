@@ -34,7 +34,7 @@ export default function HomePage() {
     console.log(posts)
   }, []);
 
-  return (
+  return (<>
     <div className="content-wrapper">
       <div className="filter-area" ref={dropdownRef}>
         <FilterDropdown
@@ -74,5 +74,6 @@ export default function HomePage() {
         ))}
       </div>
     </div>
-  );
+    
+  </>);
 }
