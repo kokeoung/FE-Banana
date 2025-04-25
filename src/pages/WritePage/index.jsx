@@ -162,11 +162,12 @@ export default function WritePage() {
     fetchPost();
   }, []);
 
-  if(data == ""){
-    return(<>
-      페이지가 덜 로딩되었습니다
-    </>)
+  if (postId !== "글작성") {
+    if (!data) {
+      return <>페이지가 덜 로딩되었습니다</>;
+    }
   }
+  
   return(
     <div className="editor-wrapper">
       {/* 왼쪽 글 작성 영역 */}
