@@ -56,28 +56,30 @@
 
 .comment-author {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 23px;
+  margin-left: 10px;
 }
 
 .comment-date {
   color: #666;
   font-size: 0.9rem;
 }
-
-.comment-content p {
+.comment-footer{
+  display: flex;
+  justify-content: space-between;
+}
+.comment-footer > p{
+  font-size: 20px;
   margin: 0;
   line-height: 1.6;
   padding-top: 1rem;
 }
-
 .comment-delete {
   background: none;
   border: none;
   color: #666;
   font-size: 14px;
   cursor: pointer;
-  padding-top: 1rem;
-  padding-left: 40rem;
   text-decoration: underline;
   user-select: text; 
 }

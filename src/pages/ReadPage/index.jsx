@@ -4,13 +4,15 @@ import Button from '../../shared/ui/Button';
 import './ReadPage.css';
 import { usePageContext } from '../../app/providers/PageContext';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentArea from '../../shared/ui/Comment';
 import logo from '../../app/assets/logo2.png';
+import { marked } from 'marked';
 
 export default function ReadPage() {
   // URL 파라미터에서 postId 추출
   const { postId } = useParams();
+  const Navigate = useNavigate();
 
   // 상태 관리
   const [post, setPost] = useState(null); // 게시글 정보
@@ -24,13 +26,6 @@ export default function ReadPage() {
   const userReply = JSON.parse(localStorage.getItem('user'));
   const id = userReply ? userReply.id : null;
   console.log("commentid: ", userReply.id);
-  
-  // console.log("Current User ID:", id, "Type:", typeof id);
-  // console.log("Comment User IDs:", comments.map(c => ({
-  //   id: c.userId,
-  //   type: typeof c.userId
-  // })));
-
 
   // 게시글 & 댓글 데이터 fetch
   useEffect(() => {
@@ -108,6 +103,22 @@ export default function ReadPage() {
       alert('댓글 작성에 실패했습니다');
     }
   };
+  const handleDeletePost = async() => {
+
+    const deletedPost = window.confirm("삭제하시겠습니까?");
+    if(!deletedPost) return;
+
+    try {
+      await fetch(`http://localhost:8080/api/read/delete/${postId}`, {method: 'GET',});
+    } catch (err){
+      console.error(err);
+      alert('네트워크 오류 발생');
+    }
+    Navigate("/");
+  };
+  function handleUpdatePost (){
+    Navigate(`/write/${post.postId}`);
+  }
 
   const handleDelete = async (commentId) => {
     if (window.confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
@@ -189,35 +200,64 @@ export default function ReadPage() {
             </div>
           </div>
           <Button className="follow-btn" size="m" value="팔로우" />
-        </section>
+        </div>
+      </section>
 
-        {/* 댓글 작성 폼 */}
-        <section className="comment-form">
-          <textarea
-            placeholder="댓글을 작성하세요"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <Button 
-            className="submit-comment" 
-            size="m" 
-            value="댓글 작성"
-            onClick={submitComment}
-          />
-        </section>
+      {/* 게시글 본문 영역 */}
+      <section className="post-content">
+        <div className="post-content-wrapper">
+          {post.postContent.split('\n\n').map((paragraph, index) => (
+            <div key={index}><div
+                      className="markdown-body"
+                      dangerouslySetInnerHTML={{ __html: marked(paragraph)}}
+                    />
+            </div>
+          ))}
+        </div>
+        <div className="reaction-buttons">
+          <button className="reaction-btn"><FaHeart /><span>{post.likeCount}</span></button>
+          <button className="reaction-btn"><FaShareAlt /></button>
+          {(post.userId == userReply?.id)?<button className='post-update-button'
+            onClick={handleUpdatePost}>수정하기</button>:""}
+          {(post.userId == userReply?.id)?<button className='post-delete-button'
+            onClick={handleDeletePost}>삭제하기</button>:""}
+        </div>
+      </section>
 
-        {/* 댓글 목록 */}
-        <section className="comments">
-          {comments.map((comment) => {
-            // 현재 사용자가 댓글 작성자인지 확인
-            // console.log(`[DEBUG] 댓글 ${comment.commentId}:`, {
-            //   currentUserId: id,
-            //   commentUserId: comment.userId,
-            //   isCurrentUser: isCurrentUser
-            // });
+      {/* 작성자 프로필 */}
+      <section className="author-profile">
+        <div className="profile-info">
+          {post.userProfileImage ? (
+            <img src={post.userProfileImage} alt={post.userNick} className="profile-avatar" />
+          ) : (
+            <FaUserCircle className="profile-avatar" />
+          )}
+          <div className="profile-details">
+            <h3>{post.userNick}</h3>
+          </div>
+        </div>
+        <Button className="follow-btn" size="m" value="팔로우" />
+      </section>
 
-            return (
-              <div key={comment.commentId} className="comment-wrapper">
+      {/* 댓글 작성 폼 */}
+      <section className="comment-form">
+        <textarea
+          placeholder="댓글을 작성하세요"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <Button 
+          className="submit-comment" 
+          size="m" 
+          value="댓글 작성"
+          onClick={submitComment}
+        />
+      </section>
+
+      {/* 댓글 목록 */}
+      <section className="comments">
+        {comments.map((comment) => (
+          <div key={comment.commentId} className="comment-wrapper">
                 <CommentArea
                   comment={comment}
                   userId={comment.userId} 

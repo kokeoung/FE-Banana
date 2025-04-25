@@ -56,7 +56,7 @@ const router=createBrowserRouter([
     element:<SimpleLayout />,
     children:[
       {
-        path:"write",
+        path:"write/:postId",
         element:<WritePage />
       },
       {
