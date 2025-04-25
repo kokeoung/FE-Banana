@@ -4,7 +4,7 @@ import Button from '../../shared/ui/Button';
 import './ReadPage.css';
 import { usePageContext } from '../../app/providers/PageContext';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentArea from '../../shared/ui/Comment';
 import logo from '../../app/assets/logo2.png';
 import { marked } from 'marked';
@@ -12,6 +12,7 @@ import { marked } from 'marked';
 export default function ReadPage() {
   // URL 파라미터에서 postId 추출
   const { postId } = useParams();
+  const Navigate = useNavigate();
 
   // 상태 관리
   const [post, setPost] = useState(null); // 게시글 정보
@@ -105,6 +106,10 @@ export default function ReadPage() {
     }
   };
   const handleDeletePost = async() => {
+
+    const deletedPost = window.confirm("삭제하시겠습니까?");
+    if(!deletedPost) return;
+
     try {
       const response = await fetch(`http://localhost:8080/api/read/delete/${postId}`, {
         method: 'GET',
@@ -113,6 +118,7 @@ export default function ReadPage() {
       console.error(err);
       alert('네트워크 오류 발생');
     }
+    Navigate("/");
   };
 
   const handleDelete = () => {};
