@@ -5,10 +5,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchResults from "../SearchResults";
 
 export default function SearchPage() {
-  const [isFocused, SetIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); //검색어 상태
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [searchParams] = useSearchParams();
+  const [posts, setPosts]=useState([]);
+  const [loading, setLoading]=useState(true);
   const navigate = useNavigate();
   const inputRef=useRef(null);
 
@@ -34,6 +36,45 @@ export default function SearchPage() {
     return () => clearTimeout(delay); //cleanup : 타이머 중복 제거
   }, [searchTerm, navigate, searchParams]);
 
+  //fetch로 백앤드 API 호출
+  useEffect(()=>{
+    let isMounted=true;
+
+    const fetchSearchResults=async()=>{
+      if(!searchTerm) return;
+
+      try{
+      setLoading(true);
+      console.log("검색 API 호출 중~~");
+      const response = await fetch(`http://localhost:8080/api/search/keyword`,{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({keyword: searchTerm}),
+      });
+      if(!response.ok){
+        throw new Error (`서버 응답 오류: ${response.status}`);
+      }
+      const data=await response.json();
+      setPosts(data);
+      console.log('검색 결과 : ',data)
+      } catch (error){
+        console.error('검색 중 오류 발생 : ', error)
+      } finally {
+        setLoading(false);
+      }
+    };
+    const delay=setTimeout(()=>{
+      fetchSearchResults();
+    }, 500); //500ms 디바운싱 후 결과 호출
+    return()=>{
+      isMounted=false;
+      clearTimeout(delay)
+    }; //cleanup
+  },[searchTerm]);
+
+
   //화면 크기 변경 감지
   useEffect(() => {
     const handleResize = () => {
@@ -57,7 +98,6 @@ export default function SearchPage() {
     inputRef.current?.focus();
   }
 
-
   return (<>
     <div className="search-wrap">
       <div className="search-container">
@@ -76,8 +116,8 @@ export default function SearchPage() {
             className="search-input"
             type="text"
             placeholder="검색어를 입력하세요"
-            onFocus={() => SetIsFocused(true)} //클릭하면 true
-            onBlur={() => SetIsFocused(false)} //포커스 벗어나면 false
+            onFocus={() => setIsFocused(true)} //클릭하면 true
+            onBlur={() => setIsFocused(false)} //포커스 벗어나면 false
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             ref={inputRef}
@@ -85,7 +125,13 @@ export default function SearchPage() {
         </form>
       </div>
       <div className="search-result">
-        {isSearching && <SearchResults />}
+        {isSearching && 
+          <SearchResults
+            posts={posts}
+            loading={loading}
+            query={searchTerm}
+            // authors={authorMap}
+           />}
       </div>
     </div>
     </>);

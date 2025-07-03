@@ -10,18 +10,25 @@ marked.setOptions({
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 // import 'github-markdown-css/github-markdown-light.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import { marked } from 'marked';
 
 import './WritePage.css';
 import './Markdown.css';
+import TurndownService from 'turndown';
 
 export default function WritePage() {
 
+  const { postId } = useParams();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [thumbnail,setThumbnail] = useState('');
+  const [data,setData] = useState('');
   const Navigate = useNavigate();
   const editorRef = useRef();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const turndownService = new TurndownService();
+ 
 
   // 나가기 버튼
   const handleExit = () => {
@@ -38,16 +45,129 @@ export default function WritePage() {
     }
   };
 
+  const firstImageFind = (markdown) => {
+    const regex = /!\[.*?\]\((.*?)\)/;
+    const match = markdown.match(regex);
+    return match ? match[1] : null;
+  }
+
   const handleChange = () => {
-    const editorContent = editorRef.current.getInstance().getMarkdown();
+    const editorContent = editorRef.current.getInstance().getHTML();
+    const imageFind = editorRef.current.getInstance().getMarkdown();
+    const thumbnail = firstImageFind(imageFind);
     setContent(editorContent);
+    setThumbnail(thumbnail);
   };
+
+   const handleWriteClicked = async() => {
+    const isTitleEmpty = title.trim() === '';
+    const isContentEmpty = content.trim() === '';
+    if(isTitleEmpty){
+      alert("제목을 입력해 주세요");
+      return;
+    }
+    if(isContentEmpty){
+      alert("내용을 입력해 주세요");
+      return;
+    }
+
+    const sendData = {
+      user: user.id,
+      postTitle: title,
+      postContent: content,
+      thumbnail: thumbnail
+    }
+    console.log(sendData)
+    const url = `http://localhost:8080/api/write`;
+    const init = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(sendData)
+    }
+    const response = await fetch(url, init);
+    console.log(response);
+    const data = await response.json();
+    
+    Navigate(`/posts/${data.id}`,{ replace: true });
+  }
+  const handleImageUpload = async (blob, callback) => {
+    // 1. S3에 이미지 업로드
+    const imageUrl = await uploadToS3(blob);
+
+    // 2. Toast UI에 이미지 삽입
+    callback(imageUrl, '이미지');
+  };
+
+  const uploadToS3 = async (file) => {
+    const formData = new FormData();
+    formData.append('postFile', file);
+    const url = `http://localhost:8080/api/write/url`;
+    const init = {
+      method: "POST",
+      body: formData,
+    }
+    const response = await fetch(url,init);
+    console.log("status:", response.status);
+    const data = await response.text();
+    console.log(data);
+    return data;
+  }
+  const handleWriteUpdateClicked = async() => {
+    
+    const isTitleEmpty = title.trim() === '';
+    const isContentEmpty = content.trim() === '';
+    if(isTitleEmpty){
+      alert("제목을 입력해 주세요");
+      return;
+    }
+    if(isContentEmpty){
+      alert("내용을 입력해 주세요");
+      return;
+    }
+
+    const sendData = {
+      user: user.id,
+      postTitle: title,
+      postContent: content,
+      thumbnail: thumbnail,
+      postId: Number(postId)
+    }
+    console.log(sendData)
+    const url = `http://localhost:8080/api/write/update`;
+    const init = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(sendData)
+    }
+    const response = await fetch(url, init);
+    const data = await response.json();
+    
+    Navigate(`/posts/${data.id}`,{ replace: true });
+  }
 
   useEffect(() => {
     // 마운트 후 한 번 비워줌
-    editorRef.current?.getInstance().setMarkdown('');
+    // editorRef.current?.getInstance().setMarkdown('');
+    const url = `http://localhost:8080/api/write/${postId}`;
+    if(postId === "글작성") return;
+    async function fetchPost(){
+      const response = await fetch(url,{method: 'GET',})
+      const data = await response.json();
+      setData(data);
+      setTitle(data.postTitle);
+      const markContent = turndownService.turndown(data.postContent);
+      setContent(markContent);
+      editorRef.current?.getInstance().setMarkdown(markContent);
+    }
+    fetchPost();
   }, []);
 
+  if (postId !== "글작성") {
+    if (!data) {
+      return <>페이지가 덜 로딩되었습니다</>;
+    }
+  }
+  
   return(
     <div className="editor-wrapper">
       {/* 왼쪽 글 작성 영역 */}
@@ -64,15 +184,17 @@ export default function WritePage() {
         <div className="editor-title-underline" />
 
         <div className="editor-container">
-          <Editor 
+          <Editor
+            hooks={{
+              addImageBlobHook: handleImageUpload,
+            }}
             placeholder="당신의 이야기를 적어보세요!!"
             height="720px"
             useCommandShortcut={true}
             onChange={handleChange}
             ref={editorRef}
             initialEditType="markdown"  // 마크다운 모드
-            hideModeSwitch={true} 
-            initialValue=""
+            hideModeSwitch={true}       
             toolbarItems={[
               ['heading', 'bold', 'italic', 'strike'],
               ['hr', 'quote'],
@@ -86,7 +208,8 @@ export default function WritePage() {
           <span className="editor-exit" onClick={handleExit}>↩  나가기</span>
           <div className="editor-bottons">
             <button className="btn-save">임시저장</button>
-            <button className="btn-submit">작성완료</button>                  
+            {(postId === "글작성")?<button className="btn-submit" onClick={handleWriteClicked}>작성완료</button>
+              :<button className="btn-submit" onClick={handleWriteUpdateClicked}>수정 완료</button>}                  
           </div>
         </div>
       </div>
@@ -96,7 +219,7 @@ export default function WritePage() {
         <h1>{title}</h1>
         <div
           className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: marked(content) }}
+          dangerouslySetInnerHTML={{ __html: marked(content)}}
         />
       </div>
     </div>        

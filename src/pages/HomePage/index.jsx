@@ -1,87 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import PostCard from '../../shared/ui/PostCard';
 import UserProfile from '../../shared/ui/UserProfile';
 import FilterDropdown from '../../shared/ui/FilterDropdown';
 import './HomePage.css';
 
-const dummyPosts = [
-  {
-    id: 1,
-    title: '테스트1',
-    imageUrl: 'https://mblogthumb-phinf.pstatic.net/20120615_30/snaps1_1339721440666NgJXG_JPEG/%BA%B0%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD%B9%E3%BE%DF%B0%E6%BB%E7%C1%F8%C0%DF%C2%EF%B4%C2%B9%FD.jpg?type=w420',
-    createdAt: '2025년 04월 06일',
-    profileImage: 'https://i.pinimg.com/236x/a8/5e/d1/a85ed1aadc527bfad8b805d62564b254.jpg',
-    nickname: '테스터1',
-    likes: 12,
-  },
-  {
-    id: 2,
-    title: '테스트2',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 8,
-  },
-  {
-    id: 3,
-    title: '테스트3',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 15,
-  },
-  {
-    id: 4,
-    title: '테스트4',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 20,
-  },
-  {
-    id: 5,
-    title: '테스트5',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-  {
-    id: 6,
-    title: '테스트6',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-  {
-    id: 7,
-    title: '테스트7',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-  {
-    id: 8,
-    title: '테스트8',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-  {
-    id: 9,
-    title: '테스트9',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-  {
-    id: 10,
-    title: '테스트10',
-    imageUrl: 'https://via.placeholder.com/320x180',
-    createdAt: '2025년 04월 06일',
-    likes: 34,
-  },
-];
-
 export default function HomePage() {
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [posts, setPosts] = useState([]); 
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -89,15 +17,29 @@ export default function HomePage() {
         setIsDropdownOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  return (
+  useEffect(() => {
+    fetch("http://localhost:8080/api/home")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("받은 포스트 데이터: ", data);
+      setPosts(data);
+    })
+    .catch((error) => {
+      console.log("포스트 데이터 가져오기 실패: ", error)
+    });
+    console.log(posts)
+  }, []);
+
+  return (<>
     <div className="content-wrapper">
       <div className="filter-area" ref={dropdownRef}>
         <FilterDropdown
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
           onChange={(value) => {
             console.log("선택된 필터:", value);
           }}
@@ -105,21 +47,33 @@ export default function HomePage() {
       </div>
 
       <div className="post-list-container">
-        {dummyPosts.map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            imageUrl={post.imageUrl}
-            createdAt={post.createdAt}
-            likes={post.likes}
+        {posts.map((post) => (
+          <div
+            key={post.postId}
+            onClick={() => navigate(`/posts/${post.postId}`)}
+            style={{ cursor: 'pointer' }}
           >
-            <UserProfile
-              profileImage={post.profileImage}
-              nickname={post.nickname}
-            />
+          <PostCard
+            key={post.postId}
+            postTitle={post.postTitle}
+            postContent={post.postContent}
+            thumbnail={post.thumbnail}
+            createDateTime={post.createDateTime}
+            likeCount={post.likeCount}
+          >
+            <Link 
+              to={`/my/${post.userId}/posts`}
+              onClick={(e) => e.stopPropagation()}>
+              <UserProfile
+                userProfileImage={post.userProfileImage}
+                userNick={post.userNick}
+              />
+            </Link>
           </PostCard>
+          </div>
         ))}
       </div>
     </div>
-  );
+    
+  </>);
 }
