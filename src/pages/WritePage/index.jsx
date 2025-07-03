@@ -101,7 +101,7 @@ export default function WritePage() {
   const uploadToS3 = async (file) => {
     const formData = new FormData();
     formData.append('postFile', file);
-    const url = `http://localhost:8080/api/write/url`;
+    const url = `http://localhost:8080/api/write/`;
     const init = {
       method: "POST",
       body: formData,
