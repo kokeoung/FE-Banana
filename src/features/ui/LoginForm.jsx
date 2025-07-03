@@ -15,6 +15,7 @@ export default function LoginForm(){
 
     function handleClick(){
         if(!(idData&&passData)) {
+            
             setModalClose(true)
             setLoginMsg("빈 정보가 존재합니다");
             return;
